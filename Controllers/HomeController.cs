@@ -29,12 +29,15 @@ namespace NETCORE_CA_8A.Controllers
         public IActionResult Login(string username, string password)
         {
             string hashPassword = Utils.Crypto.Sha256(password);
+            
             HttpContext.Session.SetString("username", username);
 
             if (CheckAuthentication(username, hashPassword))
-                return View("Gallery","Home");
+                //return RedirectToAction("Gallery","Home");
+                return RedirectToRoute(new { controller = "Home", action = "Gallery", username = username });
+
             else
-                return View("Index","Home");
+                return View("Index", "Home");
         }
 
         public bool CheckAuthentication(string name, string password)
@@ -49,8 +52,9 @@ namespace NETCORE_CA_8A.Controllers
 
         }
 
-        public IActionResult Gallery()
+        public IActionResult Gallery(string username)
         {
+            ViewData["username"] = username;
             return View();
         }
 
