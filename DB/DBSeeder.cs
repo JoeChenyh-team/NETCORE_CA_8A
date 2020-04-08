@@ -13,7 +13,7 @@ namespace NETCORE_CA_8A.DB
         {
             Customer cust1 = new Customer();
             cust1.Id = Guid.NewGuid().ToString();
-            cust1.Name = "amenda";
+            cust1.Name = "amanda";
             cust1.Password = Utils.Crypto.Sha256(cust1.Name);
             dbcontext.Add(cust1);
 
