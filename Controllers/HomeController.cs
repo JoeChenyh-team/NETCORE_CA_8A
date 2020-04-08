@@ -34,7 +34,7 @@ namespace NETCORE_CA_8A.Controllers
 
             if (CheckAuthentication(username, hashPassword))
                 //return RedirectToAction("Gallery","Home");
-                return RedirectToRoute(new { controller = "Home", action = "Gallery", username = username });
+                return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
 
             else
                 return View("Index", "Home");
@@ -50,12 +50,6 @@ namespace NETCORE_CA_8A.Controllers
             }
             return true;
 
-        }
-
-        public IActionResult Gallery(string username)
-        {
-            ViewData["username"] = username;
-            return View();
         }
 
         
