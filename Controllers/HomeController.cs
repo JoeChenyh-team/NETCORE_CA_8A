@@ -13,10 +13,12 @@ namespace NETCORE_CA_8A.Controllers
 {
     public class HomeController : Controller
     {
+        protected StoreDbContext _dbcontext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(StoreDbContext dbcontext,ILogger<HomeController> logger)
         {
+            _dbcontext = dbcontext;
             _logger = logger;
         }
 
@@ -28,14 +30,25 @@ namespace NETCORE_CA_8A.Controllers
         {
             string hashPassword = Utils.Crypto.Sha256(password);
             HttpContext.Session.SetString("username", username);
-            if (new DBTester(new StoreDbContext()).CheckAuthentication(username,hashPassword) == true)
-            {
-                return RedirectToAction("Gallery", "Home");
-            }
-            return View();
+
+            if (CheckAuthentication(username, hashPassword))
+                return View("Gallery","Home");
+            else
+                return View("Index","Home");
         }
 
-       
+        public bool CheckAuthentication(string name, string password)
+        {
+            var pwd = _dbcontext.Customers.Where(x => x.Name == name)
+                    .Select(x => x.Password).FirstOrDefault();
+            if (pwd == null || password != pwd)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
         public IActionResult Gallery()
         {
             return View();
