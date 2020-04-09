@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace NETCORE_CA_8A.Models
 {
-    public class PurchaseHistory
+    public class Purchase
     {
+        internal object PurchaseDate;
+
         [MaxLength(36)] 
         [DatabaseGenerated(DatabaseGeneratedOption.None)] 
         public string OrderId { get; set; }
@@ -25,7 +27,13 @@ namespace NETCORE_CA_8A.Models
         [MaxLength(3)]
         public double ProductQty { get; set; }
 
+        [MaxLength(36)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string PurchaseKey { get; set; }
 
+        [Required]
+        [MaxLength(36)]
+        public System.DateTime DateCreated { get; set; }
 
 
     }

@@ -19,6 +19,12 @@ namespace NETCORE_CA_8A.DB
             cust1.Password = Utils.Crypto.Sha256(cust1.Name);
             dbcontext.Add(cust1);
 
+            Customer cust2 = new Customer();
+            cust2.Id = "0001";
+            cust2.Name = "joe";
+            cust2.Password = "joe";
+            dbcontext.Add(cust2);
+
             Category cat1 = new Category();
             cat1.Id = Guid.NewGuid().ToString();
             cat1.catName = ".NET";
@@ -108,6 +114,15 @@ namespace NETCORE_CA_8A.DB
             product9.CategoryId = cat2.Id;
             dbcontext.Add(product9);
 
+            Purchase purchase1 = new Purchase();
+            purchase1.OrderId = Guid.NewGuid().ToString();
+            purchase1.CustomerId = cust2.Id;
+            purchase1.ProductId = product1.Id;
+            purchase1.ProductQty = 1;
+            purchase1.PurchaseDate = "03/03/2020";
+            purchase1.PurchaseKey = "12345";
+            dbcontext.Add(purchase1);
+
 
             /*
             Product product10 = new Product();
@@ -118,7 +133,7 @@ namespace NETCORE_CA_8A.DB
             product7.CategoryId = cat3.Id;
             dbcontext.Add(product7);
             */
-            
+
 
             dbcontext.SaveChanges();
         }
