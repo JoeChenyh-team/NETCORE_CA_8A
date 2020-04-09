@@ -22,21 +22,22 @@ namespace NETCORE_CA_8A.Models
 
         [MaxLength(36)] 
         [DatabaseGenerated(DatabaseGeneratedOption.None)] 
-        public string OrderId { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string OrderId { get; set; }
+
+        [Required]
+        [MaxLength(36)]       
         public string CustomerId { get; set; }
 
         [Required]
         [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ProductId { get; set; }
 
         [Required]
         [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ProductName { get; set; }
 
         [Required]
@@ -45,7 +46,7 @@ namespace NETCORE_CA_8A.Models
 
         [Required]
         [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public string PurchaseKey { get; set; }
 
         [Required]
