@@ -66,7 +66,7 @@ namespace NETCORE_CA_8A
                    pattern: "{controller=Home}/{action=Gallery}/{username?}");
             });
             dbcontext.Database.EnsureDeleted();
-            dbcontext.Database.EnsureCreated();
+             dbcontext.Database.EnsureCreated();
 
             new DBSeeder(dbcontext);
             new DBTester(dbcontext);
