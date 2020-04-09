@@ -22,7 +22,7 @@ namespace NETCORE_CA_8A.DB
             Customer cust2 = new Customer();
             cust2.Id = "0001";
             cust2.Name = "joe";
-            cust2.Password = "joe";
+            cust2.Password = Utils.Crypto.Sha256(cust2.Name);
             dbcontext.Add(cust2);
 
             Category cat1 = new Category();
