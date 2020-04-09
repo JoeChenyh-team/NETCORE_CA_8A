@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NETCORE_CA_8A.Models;
 
 namespace NETCORE_CA_8A.Controllers
 {
@@ -15,8 +17,23 @@ namespace NETCORE_CA_8A.Controllers
             return View();
         }
 
-        // GET: Cart/Details/5
-        public ActionResult Details(int id)
+        public ActionResult AddToCart(string Id)
+        {
+            // Retrieve the album from the database
+            var addeditem = DbContext.Product.
+                .Single(model => model.AlbumId == id);
+
+            // Add it to the shopping cart
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            cart.AddToCart(addedAlbum);
+
+            // Go back to the main store page for more shopping
+            return RedirectToAction("Index");
+        }
+
+            // GET: Cart/Details/5
+            public ActionResult Details(int id)
         {
             return View();
         }
