@@ -20,16 +20,24 @@ namespace NETCORE_CA_8A.Controllers
         public ActionResult AddtoCart(string id)
         {
             Product product = new Product();
+            
+            ProductModel productModel = new ProductModel();
             if (HttpContext.Session.GetString("cart") == null)
             {
-                List<Product> cart = new List<Product>();
-                cart.Add(new Product { Product = productModel.find(id), Quantity = 1 });
-                Session["cart"] = cart;
+                List<Item> cart = new List<Item>();
+                cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
+                //HttpContext.Session.Set("cart", cart);
+                //HttpContext.Session.SetComplexData("cart", cart);
+                //HttpContext.Session.SetObject("cart", cart);
+                //HttpContext.Session["cart"] = cart;
+                //HttpContext.Session.Set<Item>("cart", cart);
+                ViewBag.cart = cart;
             }
             else
             {
-                List<Item> cart = (List<Item>)Session["cart"];
-                int index = isExist(id);
+                // List<Item> cart = (List<Item>)Session["cart"];
+                List<Item> cart = ViewBag.cart;
+                 int index = isExist(id);
                 if (index != -1)
                 {
                     cart[index].Quantity++;
@@ -38,9 +46,20 @@ namespace NETCORE_CA_8A.Controllers
                 {
                     cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
                 }
-                Session["cart"] = cart;
+                //Session["cart"] = cart;
+                ViewBag.cart = cart;
             }
             return RedirectToAction("Index");
+        }
+
+        private int isExist(string id)
+        {
+            //List<Item> cart = (List<Item>)Session["cart"];
+            List<Item> cart = ViewBag.cart;
+            for (int i = 0; i < cart.Count; i++)
+                if (cart[i].Product.Id.Equals(id))
+                    return i;
+            return -1;
         }
 
         // GET: Cart/Details/5
