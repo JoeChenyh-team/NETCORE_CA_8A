@@ -43,7 +43,7 @@
         <div><h4 class="title">@product.productName</h4></div>
         <div><p class="desc">@product.description</p></div>
         <div>Price: $@product.unitPrice</div>
-        <div><button class="btn-primary" onclick="updateCart(@Html.Raw("'" + "/Shop/AddToCart?quantity=1&productId=" + @product.Id + "'"))">Add to Cart</button></div>
+        <div><button class="btn-primary" onclick="updateCart(@Html.Raw("'" + "/Cart/AddToCart?productId=" + @product.Id + "'"))">Add to Cart</button></div>
         <p>
         <p>
         </p>
