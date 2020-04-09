@@ -42,7 +42,7 @@ namespace NETCORE_CA_8A.Models
 
         [Required]
         [MaxLength(36)]
-        public System.DateTime PurchaseDate { get; set; }
+        public string PurchaseDate { get; set; }
 
 
     }

@@ -29,7 +29,7 @@ namespace NETCORE_CA_8A.Controllers
 
         /* Purchase purchase1 = new Purchase();
             purchase1.OrderId = Guid.NewGuid().ToString();
-purchase1.CustomerId = cust2.Id;
+purchase1.CustomerId = cust1.Id;
             purchase1.ProductId = product1.Id;
             purchase1.ProductQty = 1;
             purchase1.PurchaseDate = "03/03/2020";
