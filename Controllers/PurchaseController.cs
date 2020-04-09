@@ -36,11 +36,11 @@ purchase1.CustomerId = cust1.Id;
             purchase1.PurchaseKey = "12345";
             dbcontext.Add(purchase1); */
 
-        public IActionResult Purchase(string customerid)
+        public IActionResult Purchase(string username)
         {
 
-            ViewData["CustomerId"] = customerid;
-            ViewBag.Purchases = GetAllPurchases(customerid);
+            ViewData["username"] = username;
+            ViewBag.Purchases = GetAllPurchases(username);
             
             return View();
         }
