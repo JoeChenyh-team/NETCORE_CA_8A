@@ -115,7 +115,8 @@ namespace NETCORE_CA_8A.DB
             dbcontext.Add(product9);
 
             Purchase purchase1 = new Purchase();
-            purchase1.OrderId = Guid.NewGuid().ToString();
+            purchase1.Id = Guid.NewGuid().ToString();
+            purchase1.OrderId = "001";
             purchase1.CustomerId = cust2.Id;
             purchase1.ProductId = product1.Id;
             purchase1.ProductName = product1.productName;
