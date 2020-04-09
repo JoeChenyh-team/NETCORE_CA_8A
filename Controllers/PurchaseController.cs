@@ -26,6 +26,16 @@ namespace NETCORE_CA_8A.Controllers
             _dbcontext = dbcontext;
             _logger = logger;
         }
+
+        /* Purchase purchase1 = new Purchase();
+            purchase1.OrderId = Guid.NewGuid().ToString();
+purchase1.CustomerId = cust2.Id;
+            purchase1.ProductId = product1.Id;
+            purchase1.ProductQty = 1;
+            purchase1.PurchaseDate = "03/03/2020";
+            purchase1.PurchaseKey = "12345";
+            dbcontext.Add(purchase1); */
+
         public IActionResult Purchase(string username)
         {
             ViewData["username"] = username;
