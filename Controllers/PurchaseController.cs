@@ -40,9 +40,13 @@ purchase1.CustomerId = cust1.Id;
         {
             ViewData["customerid"] = customerid;
             ViewBag.purchase = GetAllPurchase(customerid);
-            if (ViewBag.purchase.Count == 0)
+            if (ViewBag.Purchase.Count == null)
             {
                 ViewBag.search = "not found";
+            }
+            else if (ViewBag.Purchase.Count ==0)
+            {
+                ViewBag.Search = "not found";
             }
             return View();
         }
