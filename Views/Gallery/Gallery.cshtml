@@ -27,14 +27,17 @@
     {
     <p>Sorry! Product is not found...</p>
     }
-   
-
-    
-else 
 
 
-foreach (Product product in @ViewBag.products)
-        {
+
+    else
+    {
+    <p>Search term: </p>
+
+        {@: @ViewBag.keyword}
+
+            foreach (Product product in @ViewBag.products)
+            {
 
     <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
         <div><h4 class="title">@product.productName</h4></div>
@@ -49,8 +52,9 @@ foreach (Product product in @ViewBag.products)
 
 
 
+                }
+            }
         }
     }
-}
-    
+
 

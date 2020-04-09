@@ -35,7 +35,7 @@ purchase1.CustomerId = cust1.Id;
             purchase1.PurchaseDate = "03/03/2020";
             purchase1.PurchaseKey = "12345";
             dbcontext.Add(purchase1); */
-
+/*
         public IActionResult Purchase(string username)
         {
             ViewData["username"] = username;
@@ -46,7 +46,8 @@ purchase1.CustomerId = cust1.Id;
             }
             return View();
         }
-
+        */
+        /*
         public List<Product> GetAllProducts(string username)
         {
             if (username == "")
@@ -62,6 +63,6 @@ purchase1.CustomerId = cust1.Id;
 
 
             
-        }
+        }*/
     }
 }
