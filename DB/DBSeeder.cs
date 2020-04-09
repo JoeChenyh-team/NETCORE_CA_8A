@@ -95,7 +95,7 @@ namespace NETCORE_CA_8A.DB
             Product product8 = new Product();
             product8.Id = Guid.NewGuid().ToString();
             product8.productName = "MS Outlook";
-            product8.description = "Powerful applciation to access your emails.";
+            product8.description = "Powerful application to access your emails.";
             product8.unitPrice = 999.00;
             product8.CategoryId = cat2.Id;
             dbcontext.Add(product8);
@@ -103,7 +103,7 @@ namespace NETCORE_CA_8A.DB
             Product product9 = new Product();
             product9.Id = Guid.NewGuid().ToString();
             product9.productName = "MS Visual Studio";
-            product9.description = "Powerful tool for your to program more programs";
+            product9.description = "Powerful tool for you to program more programs";
             product9.unitPrice = 900.00;
             product9.CategoryId = cat2.Id;
             dbcontext.Add(product9);

@@ -17,10 +17,34 @@ namespace NETCORE_CA_8A.Controllers
             return View();
         }
 
-        
+        public ActionResult AddtoCart(string id)
+        {
+            Product product = new Product();
+            if (HttpContext.Session.GetString("cart") == null)
+            {
+                List<Product> cart = new List<Product>();
+                cart.Add(new Product { Product = productModel.find(id), Quantity = 1 });
+                Session["cart"] = cart;
+            }
+            else
+            {
+                List<Item> cart = (List<Item>)Session["cart"];
+                int index = isExist(id);
+                if (index != -1)
+                {
+                    cart[index].Quantity++;
+                }
+                else
+                {
+                    cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
+                }
+                Session["cart"] = cart;
+            }
+            return RedirectToAction("Index");
+        }
 
-            // GET: Cart/Details/5
-            public ActionResult Details(int id)
+        // GET: Cart/Details/5
+        public ActionResult Details(int id)
         {
             return View();
         }
