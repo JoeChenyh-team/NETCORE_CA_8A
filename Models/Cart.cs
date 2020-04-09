@@ -21,11 +21,16 @@ namespace NETCORE_CA_8A.Models
         [MaxLength(36)]
         public System.DateTime DateCreated { get; set; }
 
+        [MaxLength(36)]
+        public string CustomerId { get; set; }
+
+
         [Required]
         [MaxLength(36)]
         public int ProductId { get; set; }
 
         public virtual Product Product { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 
     
