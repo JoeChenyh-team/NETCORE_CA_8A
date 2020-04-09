@@ -9,6 +9,8 @@ using NETCORE_CA_8A.Models;
 using NETCORE_CA_8A.DB;
 using Microsoft.AspNetCore.Http;
 
+//This controller is for the Home Page (for Login) 
+
 namespace NETCORE_CA_8A.Controllers
 {
     public class HomeController : Controller

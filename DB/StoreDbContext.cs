@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//We use StoreDBContext to store all the get set functions 
+
 namespace NETCORE_CA_8A.DB
 {
     public class StoreDbContext:DbContext
@@ -23,6 +25,7 @@ namespace NETCORE_CA_8A.DB
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<NETCORE_CA_8A.Models.Order> Order { get; set; }
     }
 }
 

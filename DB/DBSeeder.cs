@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//We use this DBSeeder.cs to 'hardcode' the customers and products. 
+
 namespace NETCORE_CA_8A.DB
 {
     public class DBSeeder

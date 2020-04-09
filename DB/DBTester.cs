@@ -8,6 +8,8 @@ using NETCORE_CA_8A.Models;
 using NETCORE_CA_8A.DB;
 using Microsoft.AspNetCore.Http;
 
+//We use the DBTester to check for the password authentication. 
+
 namespace NETCORE_CA_8A.DB
 {
     public class DBTester

@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 using NETCORE_CA_8A.DB;
 using NETCORE_CA_8A.Models;
 
+
+// This controller is for the Gallery. 
+
 namespace NETCORE_CA_8A.Controllers
 {
     public class GalleryController : Controller
