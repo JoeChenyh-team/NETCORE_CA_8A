@@ -35,34 +35,31 @@ purchase1.CustomerId = cust1.Id;
             purchase1.PurchaseDate = "03/03/2020";
             purchase1.PurchaseKey = "12345";
             dbcontext.Add(purchase1); */
-/*
+
         public IActionResult Purchase(string username)
         {
             ViewData["username"] = username;
-            ViewBag.products = GetAllProducts(username);
-            if (ViewBag.products.Count == 0)
+            ViewBag.purchase = GetAllPurchase(username);
+            if (ViewBag.purchase.Count == 0)
             {
                 ViewBag.search = "not found";
             }
             return View();
         }
-        */
-        /*
-        public List<Product> GetAllProducts(string username)
+        
+        public List<Purchase> GetAllPurchase(string username)
         {
-            if (username == "")
-            {
-                return _dbcontext.Products.ToList();
-            }
+            
 
             if (username == null)
             {
                 return null;
             }
 
-
-
+            return _dbcontext.Purchase.ToList();
             
-        }*/
+
+
+        }
     }
 }
