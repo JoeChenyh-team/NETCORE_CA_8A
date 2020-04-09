@@ -41,6 +41,11 @@ namespace NETCORE_CA_8A.Controllers
                 return _dbcontext.Products.ToList();
             }
 
+            if (keyword == null)
+            {
+                return _dbcontext.Products.ToList();
+            }
+
            
 
             return _dbcontext.Products.Where(p =>
