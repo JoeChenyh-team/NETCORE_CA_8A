@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NETCORE_CA_8A.Models
 {
-    public class Order
+    public class PurchaseHistory
     {
         [MaxLength(36)] 
         [DatabaseGenerated(DatabaseGeneratedOption.None)] 

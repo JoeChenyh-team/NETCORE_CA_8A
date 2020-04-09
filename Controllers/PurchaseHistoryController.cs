@@ -56,7 +56,7 @@ namespace NETCORE_CA_8A.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,CustomerId,ProductId,ProductQty")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderId,CustomerId,ProductId,ProductQty")] PurchaseHistory order)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace NETCORE_CA_8A.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("OrderId,CustomerId,ProductId,ProductQty")] Order order)
+        public async Task<IActionResult> Edit(string id, [Bind("OrderId,CustomerId,ProductId,ProductQty")] PurchaseHistory order)
         {
             if (id != order.OrderId)
             {

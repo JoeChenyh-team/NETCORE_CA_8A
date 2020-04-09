@@ -26,7 +26,7 @@ namespace NETCORE_CA_8A.DB
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Cart { get; set; }
-        public DbSet<NETCORE_CA_8A.Models.Order> Order { get; set; }
+        public DbSet<NETCORE_CA_8A.Models.PurchaseHistory> Order { get; set; }
     }
 }
 
