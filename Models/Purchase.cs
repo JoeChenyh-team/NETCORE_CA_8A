@@ -32,6 +32,10 @@ namespace NETCORE_CA_8A.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ProductId { get; set; }
 
+        [MaxLength(36)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string ProductName { get; set; }
+
         [Required]
         [MaxLength(3)]
         public double ProductQty { get; set; }

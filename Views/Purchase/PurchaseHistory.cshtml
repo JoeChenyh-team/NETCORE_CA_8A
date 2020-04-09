@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "Purchase History";
     Layout = "_galleryLayout";
-    string uname = (string)ViewData["username"];
+    string customerID = (string)ViewData["customerid"];
 }
 <h1>@ViewData["_galleryLayout"]</h1>
 
@@ -22,20 +22,20 @@
 
     else
         
-        foreach (Purchase purchase in ViewBag.Orderid)
+        foreach (Purchase purchase in ViewBag.customerid)
     {
 
-        <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
-            <div><h4 class="title"></h4></div>
-            <div><p class="orderid"> </p></div>
-            <div><p class="desc"></p></div>
-            <div><p class="purchasedate"></p></div>
-            <div><p class="purchasekey"></p></div>
+<div class="gallery_product col-lg-3 col-md-4 col-xs-6">
+    <div><p class="purchasedate">@purchase.PurchaseDate</p></div>
+    <div><p class="orderid">@purchase.OrderId </p></div>
+    <div><h4 class="Productname">@purchase.ProductName</h4></div>
+    <div><h4 class="Productid">@purchase.ProductId</h4></div>
+    <div><p class="purchasekey">@purchase.PurchaseKey</p></div>
 
-            <p>
-            </p>
+    <p>
+    </p>
 
-        </div>
+</div>
 
 
 
