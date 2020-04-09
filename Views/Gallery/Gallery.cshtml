@@ -8,11 +8,11 @@
 }
 <h1>@ViewData["_galleryLayout"]</h1>
 
-<p>Welcome form Gallery.</p>
+<p>Welcome to T8A SoftStore's Product Gallery</p>
 <div align="center">
     <form action="/Gallery/Gallery" class="form-inline">
         <div class="form-group">
-            <input type="text" class="form-control input-sm" maxlength="64" placeholder="Search" name="keyword" value=@(ViewBag.keyword)>
+            <input type="text" class="form-control input-sm" maxlength="64" placeholder="Search for product" name="keyword" value=@(ViewBag.keyword)>
         </div>
         <div class="form-group">
             <input class="button-primary" type="submit" value="Search">
@@ -25,19 +25,29 @@
 @{
     if (@ViewBag.search == "not found")
     {
-        <p>Sorry! Product not found...</p>
+    <p>Sorry! Product not found...</p>
     }
     else
     {
-        foreach (Product product in @ViewBag.products)
+
+  
+   
+
+foreach (Product product in @ViewBag.products)
         {
-            <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
-                <div><h4 class="title">@product.productName</h4></div>
-                <div><p class="desc">@product.description</p></div>
-                <div>Price: $@product.unitPrice</div>
-                <div><button class="btn-primary" onclick="updateCart(@Html.Raw("'" + "/Shop/AddToCart?quantity=1&productId=" + @product.Id + "'"))">Add to Cart</button></div>
-            </div>
+
+    <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
+        <div><h4 class="title">@product.productName</h4></div>
+        <div><p class="desc">@product.description</p></div>
+        <div>Price: $@product.unitPrice</div>
+        <div><button class="btn-primary" onclick="updateCart(@Html.Raw("'" + "/Shop/AddToCart?quantity=1&productId=" + @product.Id + "'"))">Add to Cart</button></div>
+    </div>
+    <p>
+    </p>
+
+
         }
+
     }
 
 }
