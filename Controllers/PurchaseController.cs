@@ -36,10 +36,10 @@ purchase1.CustomerId = cust1.Id;
             purchase1.PurchaseKey = "12345";
             dbcontext.Add(purchase1); */
 
-        public IActionResult Purchase(string username)
+        public IActionResult Purchase(string customerid)
         {
-            ViewData["username"] = username;
-            ViewBag.purchase = GetAllPurchase(username);
+            ViewData["customerid"] = customerid;
+            ViewBag.purchase = GetAllPurchase(customerid);
             if (ViewBag.purchase.Count == 0)
             {
                 ViewBag.search = "not found";
@@ -47,11 +47,11 @@ purchase1.CustomerId = cust1.Id;
             return View();
         }
         
-        public List<Purchase> GetAllPurchase(string username)
+        public List<Purchase> GetAllPurchase(string customerid)
         {
             
 
-            if (username == null)
+            if (customerid == null)
             {
                 return null;
             }
