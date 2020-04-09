@@ -41,6 +41,8 @@ namespace NETCORE_CA_8A.Controllers
                 return _dbcontext.Products.ToList();
             }
 
+           
+
             return _dbcontext.Products.Where(p =>
                     p.productName.ToLower().Contains(keyword.ToLower()) ||
                     p.description.ToLower().Contains(keyword.ToLower()))
