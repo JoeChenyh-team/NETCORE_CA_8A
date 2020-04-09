@@ -38,15 +38,16 @@ purchase1.CustomerId = cust1.Id;
 
         public IActionResult Purchase(string customerid)
         {
-            ViewData["CustomerID"] = customerid;
-            ViewBag.purchases = GetAllPurchases(customerid);
+
+            ViewData["CustomerId"] = customerid;
+            ViewBag.Purchases = GetAllPurchases(customerid);
             
             return View();
         }
         
         public List<Purchase> GetAllPurchases(string customerid)
         {
-            
+            List<Purchase> Purchases = new List<Purchase>();
 
             if (customerid == null)
             {
