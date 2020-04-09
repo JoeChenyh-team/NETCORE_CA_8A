@@ -26,7 +26,7 @@ namespace NETCORE_CA_8A.Models
 
         [Required]
         [MaxLength(36)]
-        public string OrderId { get; set; }
+        public string CartId { get; set; }
 
         [Required]
         [MaxLength(36)]       
@@ -36,23 +36,26 @@ namespace NETCORE_CA_8A.Models
         [MaxLength(36)]
         public string ProductId { get; set; }
 
+        //Use navigational property for product name 
+        /*
         [Required]
         [MaxLength(36)]
-        public string ProductName { get; set; }
+        public string ProductName { get; set; } */
 
         [Required]
         [MaxLength(3)]
-        public double ProductQty { get; set; }
+        public double PurchaseQty { get; set; }
 
         [Required]
         [MaxLength(36)]
         
-        public string PurchaseKey { get; set; }
+        public string ActivationKey { get; set; }
 
         [Required]
         [MaxLength(36)]
-        public string PurchaseDate { get; set; }
+        public DateTime UTCPurchaseDate { get; set; }
 
+        public virtual Product Product { get; set; }
 
     }
 }

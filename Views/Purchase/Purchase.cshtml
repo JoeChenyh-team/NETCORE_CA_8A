@@ -14,23 +14,23 @@
 
 
 @{
-    if (@ViewBag.Purchase == "not found")
+    if (@ViewBag.Purchases == "not found")
     {
         <p>Sorry! Product is not found...</p>
     }
 
 
     else
-        
-        foreach (Purchase purchase in @ViewBag.Purchases)
-    {
+
+        foreach (Purchase purchase in (List<Purchase>) @ViewBag.Purchase)
+        {
 
 <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
-    <div><p class="purchasedate">@purchase.PurchaseDate</p></div>
-    <div><p class="orderid">@purchase.OrderId </p></div>
-    <div><h4 class="Productname">@purchase.ProductName</h4></div>
+    <div><p class="purchasedate">@purchase.UTCPurchaseDate</p></div>
+    <div><p class="cartid">@purchase.CartId </p></div>
+    <div><h4 class="Productname">@purchase.Product.productName</h4></div>
     <div><h4 class="Productid">@purchase.ProductId</h4></div>
-    <div><p class="purchasekey">@purchase.PurchaseKey</p></div>
+    <div><p class="purchasekey">@purchase.ActivationKey</p></div>
 
     <p>
     </p>
