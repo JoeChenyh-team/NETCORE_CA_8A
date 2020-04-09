@@ -38,20 +38,13 @@ purchase1.CustomerId = cust1.Id;
 
         public IActionResult Purchase(string customerid)
         {
-            ViewData["customerid"] = customerid;
-            ViewBag.purchase = GetAllPurchase(customerid);
-            if (ViewBag.Purchase.Count == null)
-            {
-                ViewBag.search = "not found";
-            }
-            else if (ViewBag.Purchase.Count ==0)
-            {
-                ViewBag.Search = "not found";
-            }
+            ViewData["CustomerID"] = customerid;
+            ViewBag.purchases = GetAllPurchases(customerid);
+            
             return View();
         }
         
-        public List<Purchase> GetAllPurchase(string customerid)
+        public List<Purchase> GetAllPurchases(string customerid)
         {
             
 
@@ -60,8 +53,9 @@ purchase1.CustomerId = cust1.Id;
                 return null;
             }
 
+
             return _dbcontext.Purchase.ToList();
-            
+
 
 
         }

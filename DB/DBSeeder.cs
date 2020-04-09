@@ -125,6 +125,16 @@ namespace NETCORE_CA_8A.DB
             purchase1.PurchaseKey = "12345";
             dbcontext.Add(purchase1);
 
+            Purchase purchase2 = new Purchase();
+            purchase1.Id = Guid.NewGuid().ToString();
+            purchase1.OrderId = "002";
+            purchase1.CustomerId = cust1.Id;
+            purchase1.ProductId = product1.Id;
+            purchase1.ProductName = product1.productName;
+            purchase1.ProductQty = 1;
+            purchase1.PurchaseDate = "04-04-2020";
+            purchase1.PurchaseKey = "12345";
+            dbcontext.Add(purchase1);
 
             /*
             Product product10 = new Product();
