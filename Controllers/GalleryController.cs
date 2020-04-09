@@ -41,12 +41,7 @@ namespace NETCORE_CA_8A.Controllers
                 return _dbcontext.Products.ToList();
             }
 
-            else if (keyword == null)
-            {
-                return null;
-                // how to insert error message?
-
-            }
+           
 
             return _dbcontext.Products.Where(p =>
                     p.productName.ToLower().Contains(keyword.ToLower()) ||
