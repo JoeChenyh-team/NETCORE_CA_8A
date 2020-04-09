@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model Purchase;
+
+
+@{
+    ViewData["Title"] = "Purchase History";
+    Layout = "_galleryLayout";
+    string customerID = (string)ViewData["customerid"];
+}
+<h1>@ViewData["_galleryLayout"]</h1>
+
+<p>Welcome to T8A SoftStore's Product Gallery : Purchase History</p>
+
+
+
+@{
+    if (@ViewBag.Purchase == "not found")
+    {
+        <p>Sorry! Product is not found...</p>
+    }
+
+
+    else
+        
+        foreach (Purchase purchase in ViewBag.customerid)
+    {
+
+<div class="gallery_product col-lg-3 col-md-4 col-xs-6">
+    <div><p class="purchasedate">@purchase.PurchaseDate</p></div>
+    <div><p class="orderid">@purchase.OrderId </p></div>
+    <div><h4 class="Productname">@purchase.ProductName</h4></div>
+    <div><h4 class="Productid">@purchase.ProductId</h4></div>
+    <div><p class="purchasekey">@purchase.PurchaseKey</p></div>
+
+    <p>
+    </p>
+
+</div>
+
+
+
+    }
+}
+}
+
+
