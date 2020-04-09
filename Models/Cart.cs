@@ -8,6 +8,10 @@ namespace NETCORE_CA_8A.Models
 {
     public class Cart
     {
+        //Joe adding in 
+
+
+
         public string Id { get; set; }
 
         public int Quantity { get; set; }
