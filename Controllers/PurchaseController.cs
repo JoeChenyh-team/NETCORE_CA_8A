@@ -39,8 +39,8 @@ purchase1.CustomerId = cust1.Id;
         public IActionResult Purchase(int customerid)
         {
             HttpContext.Session.GetString("CustomerId");
-            ViewData["CustomerId"] = "0002";
-            ViewBag.Purchases = GetAllPurchases("0002");
+            ViewData["CustomerId"] = 2;
+            ViewBag.Purchases = GetAllPurchases(2);
             
             return View();
         }
