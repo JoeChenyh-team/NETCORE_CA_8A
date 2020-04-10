@@ -1,12 +1,11 @@
-﻿
-@model Product;
+﻿@using Microsoft.AspNetCore.Http;
+@model Customer;
 
 @{
     ViewData["Title"] = "Gallery";
     Layout = "_galleryLayout";
-
+    string uname = (string)ViewData["username"];
 }
-
 
 @section Scripts
 {
@@ -17,8 +16,6 @@
     </script>
 }
 <h1>@ViewData["_galleryLayout"]</h1>
-
-
 
 <p>Welcome to T8A SoftStore's Product Gallery : Product Information</p>
 <div align="center">
@@ -53,9 +50,6 @@
 
     foreach (Product product in @ViewBag.products)
     {
-        <td></td>
-        <td></td>
-        <td></td>
         var str = "/Cart/AddtoCart";
         <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
             <form action=@str class="form-inline">
@@ -67,11 +61,8 @@
                 <img src="@product.Image" width="120" height="120"><p></p>
                 <div>Price: $@product.unitPrice</div><p></p>
                 <input name="productId" type="hidden" value="@product.Id" />
-
                 <input class="button-primary" type="submit" value="Add To Cart">
-                <div></div>
-                <div></div>
-                <td></td>
+                <div></div><td></td>
                 <td></td>
                 <td></td>
                 <p>
@@ -85,5 +76,7 @@
     }
 }
 }
+
+
 
 

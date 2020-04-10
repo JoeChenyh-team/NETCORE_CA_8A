@@ -18,6 +18,10 @@ namespace NETCORE_CA_8A.Models
         public string productName { get; set; }
 
         [Required]
+        [MaxLength(300)]
+        public string productLongDesc { get; set; }
+
+        [Required]
         [MaxLength(200)]
         public string description { get; set; }
 
@@ -46,6 +50,9 @@ namespace NETCORE_CA_8A.Models
             this.description = desc;
             this.unitPrice = price;
         }
+
+        public virtual Recommendation recommendation { get; set; }
+        public virtual Review review { get; set; }
     }
 }
 

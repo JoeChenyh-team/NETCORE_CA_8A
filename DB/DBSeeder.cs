@@ -27,6 +27,12 @@ namespace NETCORE_CA_8A.DB
             cust2.Password = Utils.Crypto.Sha256(cust2.Name);
             dbcontext.Add(cust2);
 
+            Customer cust3 = new Customer();
+            cust3.Id = 3;
+            cust3.Name = "esther";
+            cust3.Password = Utils.Crypto.Sha256(cust3.Name);
+            dbcontext.Add(cust3);
+
             Category cat1 = new Category();
             cat1.Id = Guid.NewGuid().ToString();
             cat1.catName = ".NET";
@@ -66,7 +72,7 @@ namespace NETCORE_CA_8A.DB
             product2.URL = "https://localhost:44331/Product/View/product2";
             dbcontext.Add(product2);
 
-            /* Product product3 = new Product();
+            Product product3 = new Product();
              product3.Id = Guid.NewGuid().ToString();
              product3.productName = ".NetML";
              product3.description = "Supercharges .NET machine learning libraries";
@@ -74,7 +80,7 @@ namespace NETCORE_CA_8A.DB
              product3.CategoryId = cat1.Id;
              product3.Image = "https://localhost:44331/lib/images/ML.JPG";
              product3.URL = "https://localhost:44331/Product/View/product3";
-             dbcontext.Add(product3);
+            dbcontext.Add(product3);
 
              Product product4 = new Product();
              product4.Id = Guid.NewGuid().ToString();
@@ -131,7 +137,7 @@ namespace NETCORE_CA_8A.DB
              dbcontext.Add(product9);
 
               Purchase purchase1 = new Purchase();
-              purchase1.OrderId = Guid.NewGuid().ToString();
+              purchase1.CartId = Guid.NewGuid().ToString();
               purchase1.CustomerId = cust2.Id;
               purchase1.ProductId = product1.Id;
               purchase1.PurchaseQty = 1;
@@ -149,6 +155,79 @@ namespace NETCORE_CA_8A.DB
               product7.CategoryId = cat3.Id;
               dbcontext.Add(product7);
               */
+
+            Recommendation recommendation1 = new Recommendation();
+            recommendation1.Id = Guid.NewGuid().ToString();
+            recommendation1.Product.Id = product1.Id;
+            recommendation1.RecommendedProductId1 = product2.Id;
+            recommendation1.RecommendedProductId2 = product3.Id;
+            recommendation1.RecommendedProductId3 = product4.Id;
+            dbcontext.Add(recommendation1);
+
+            Recommendation recommendation2 = new Recommendation();
+            recommendation2.Id = Guid.NewGuid().ToString();
+            recommendation2.Product.Id = product2.Id;
+            recommendation2.RecommendedProductId1 = product2.Id;
+            recommendation2.RecommendedProductId2 = product3.Id;
+            recommendation2.RecommendedProductId3 = product4.Id;
+            dbcontext.Add(recommendation2);
+
+            Recommendation recommendation3 = new Recommendation();
+            recommendation3.Id = Guid.NewGuid().ToString();
+            recommendation3.Product.Id = product3.Id;
+            recommendation3.RecommendedProductId1 = product2.Id;
+            recommendation3.RecommendedProductId2 = product3.Id;
+            recommendation3.RecommendedProductId3 = product4.Id;
+            dbcontext.Add(recommendation3);
+
+            Recommendation recommendation4 = new Recommendation();
+            recommendation4.Id = Guid.NewGuid().ToString();
+            recommendation4.Product.Id = product4.Id;
+            recommendation4.RecommendedProductId1 = product2.Id;
+            recommendation4.RecommendedProductId2 = product3.Id;
+            recommendation4.RecommendedProductId3 = product4.Id;
+            dbcontext.Add(recommendation4);
+
+            Recommendation recommendation5 = new Recommendation();
+            recommendation5.Id = Guid.NewGuid().ToString();
+            recommendation5.Product.Id = product5.Id;
+            recommendation5.RecommendedProductId1 = product2.Id;
+            recommendation5.RecommendedProductId2 = product3.Id;
+            recommendation5.RecommendedProductId3 = product4.Id;
+            dbcontext.Add(recommendation5);
+
+            Recommendation recommendation6 = new Recommendation();
+            recommendation6.Id = Guid.NewGuid().ToString();
+            recommendation6.Product.Id = product6.Id;
+            recommendation6.RecommendedProductId1 = product2.Id;
+            recommendation6.RecommendedProductId2 = product3.Id;
+            recommendation6.RecommendedProductId3 = product4.Id;
+            dbcontext.Add(recommendation6);
+
+            Review review1 = new Review();
+            review1.CustomerId = cust1.Id;
+            review1.ProductId = product1.Id;
+            review1.Stars = 5;
+            review1.Comments = "Good product";
+            dbcontext.Add(review1);
+
+            Review review2 = new Review();
+            review2.CustomerId = cust2.Id;
+            review2.ProductId = product2.Id;
+            review2.Stars = 3;
+            review2.Comments = "I do not like this product";
+            dbcontext.Add(review2);
+
+            Review review3 = new Review();
+            review3.CustomerId = cust3.Id;
+            review3.ProductId = product3.Id;
+            review3.Stars = 4;
+            review3.Comments = "Not bad";
+            dbcontext.Add(review3);
+
+
+
+
 
 
             dbcontext.SaveChanges();
