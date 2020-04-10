@@ -35,6 +35,8 @@ namespace NETCORE_CA_8A.Models
         {
         }
 
+        public string Image { get; set; }
+
         public Product(string name, string desc, int quantity, decimal price)
         {
             this.productName = name;
