@@ -116,24 +116,24 @@ namespace NETCORE_CA_8A.DB
 
             Purchase purchase1 = new Purchase();
             purchase1.Id = Guid.NewGuid().ToString();
-            purchase1.OrderId = "001";
+            purchase1.CartId = "001";
             purchase1.CustomerId = cust2.Id;
             purchase1.ProductId = product1.Id;
-            purchase1.ProductName = product1.productName;
-            purchase1.ProductQty = 1;
-            purchase1.PurchaseDate = "03-03-2020";
-            purchase1.PurchaseKey = "12345";
+           // purchase1.ProductName = (not sure what to type here) 
+            purchase1.PurchaseQty = 1;
+            purchase1.UTCPurchaseDate = new DateTime(2015, 12, 25);
+            purchase1.ActivationKey = "12345";
             dbcontext.Add(purchase1);
 
             Purchase purchase2 = new Purchase();
             purchase1.Id = Guid.NewGuid().ToString();
-            purchase1.OrderId = "002";
+            purchase1.CartId = "002";
             purchase1.CustomerId = cust1.Id;
             purchase1.ProductId = product1.Id;
-            purchase1.ProductName = product1.productName;
-            purchase1.ProductQty = 1;
-            purchase1.PurchaseDate = "04-04-2020";
-            purchase1.PurchaseKey = "12345";
+           // purchase1.ProductName = product1.productName;
+            purchase1.PurchaseQty = 1;
+            purchase1.UTCPurchaseDate = new DateTime(2015, 12, 25);
+            purchase1.ActivationKey = "12345";
             dbcontext.Add(purchase1);
 
             /*
@@ -151,3 +151,13 @@ namespace NETCORE_CA_8A.DB
         }
     }
 }
+
+/*  For reference (from Wing Tips project): 
+   public class ProductDatabaseInitializer : DropCreateDatabaseAlways<ProductContext>
+  {
+    protected override void Seed(ProductContext context)
+    {
+      GetCategories().ForEach(c => context.Categories.Add(c));
+      GetProducts().ForEach(p => context.Products.Add(p));
+    }
+    */

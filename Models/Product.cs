@@ -32,3 +32,4 @@ namespace NETCORE_CA_8A.Models
         public virtual Category Category { get; set; }
     }
 }
+
