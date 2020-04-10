@@ -34,13 +34,13 @@ namespace NETCORE_CA_8A.Controllers
 
             HttpContext.Session.SetString("username", username);
             //2 lines added by Joe:
-            HttpContext.Session.SetString("run", "");
-            HttpContext.Session.SetInt32("number", 1);
+           /* HttpContext.Session.SetString("run", "");
+            HttpContext.Session.SetInt32("number", 1); */
 
             if (CheckAuthentication(username, hashPassword))
                 //return RedirectToAction("Gallery","Home");
-                // return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
-                return RedirectToAction("Track", "Home");
+                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", custID = username });
+                
             else
                 return View("Index", "Home");
         }
