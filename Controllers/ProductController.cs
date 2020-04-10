@@ -43,11 +43,11 @@ namespace NETCORE_CA_8A.Controllers
         public IActionResult View2(string newid)
         {
             ViewData["newid"] = newid;
-            ViewBag.products = GetAllProducts(newid);
+            ViewBag.Product = GetAllProducts(newid);
             ViewBag.Recommendation = GetAllRecommend(newid);
             ViewBag.Review = GetAllReview(newid);
 
-            if (ViewBag.products.Count == 0)
+            if (ViewBag.Product.Count == 0)
             {
                 ViewBag.search = "not found";
             }

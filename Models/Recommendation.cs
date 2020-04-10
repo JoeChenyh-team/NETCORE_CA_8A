@@ -19,15 +19,15 @@ namespace NETCORE_CA_8A.Models
 
         [MaxLength(36)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string RecommendedProductId1 { get; set; }
+        public string RecommendedProduct1 { get; set; }
 
         [MaxLength(36)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string RecommendedProductId2 { get; set; }
+        public string RecommendedProduct2 { get; set; }
 
         [MaxLength(36)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string RecommendedProductId3 { get; set; }
+        public string RecommendedProduct3 { get; set; }
 
         public virtual Product Product { get; set; }
     }

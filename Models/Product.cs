@@ -17,7 +17,7 @@ namespace NETCORE_CA_8A.Models
         [MaxLength(100)]
         public string productName { get; set; }
 
-        [Required]
+    
         [MaxLength(300)]
         public string productLongDesc { get; set; }
 
@@ -27,7 +27,7 @@ namespace NETCORE_CA_8A.Models
 
         [Required]
         [MaxLength(3)]
-        public decimal unitPrice { get; set; }
+        public double unitPrice { get; set; }
 
         [Required]
         [MaxLength(36)]
@@ -44,7 +44,7 @@ namespace NETCORE_CA_8A.Models
 
         public string Image { get; set; }
 
-        public Product(string name, string desc, int quantity, decimal price)
+        public Product(string name, string desc, int quantity, double price)
         {
             this.productName = name;
             this.description = desc;
