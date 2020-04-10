@@ -51,6 +51,7 @@ namespace NETCORE_CA_8A.DB
            product1.description = "Brings powerful charting capabilities to your .Net applications";
            product1.unitPrice = (decimal)99.00;
            product1.CategoryId = cat1.Id;
+            product1.Image ="http://localhost/lib/images/Charts.JPG";
            dbcontext.Add(product1);
 
            Product product2 = new Product();
@@ -60,6 +61,7 @@ namespace NETCORE_CA_8A.DB
            product2.description = "Integrate your .Net apps with Paypal the easy way";
            product2.unitPrice = (decimal)69.00;
            product2.CategoryId = cat1.Id;
+            product2.Image="http://localhost/lib/images/Paypal.JPG";
            dbcontext.Add(product2);
 
           /* Product product3 = new Product();
@@ -68,6 +70,7 @@ namespace NETCORE_CA_8A.DB
            product3.description = "Supercharges .NET machine learning libraries";
            product3.unitPrice = 299.00;
            product3.CategoryId = cat1.Id;
+           product3.Image="http://localhost/lib/images/ML.JPG";
            dbcontext.Add(product3);
 
            Product product4 = new Product();
@@ -76,6 +79,7 @@ namespace NETCORE_CA_8A.DB
            product4.description = "Perform data mining and analytics easily in .NET";
            product4.unitPrice = 299.00;
            product4.CategoryId = cat1.Id;
+           product4.Image="http://localhost/lib/images/Analytics.JPG";
            dbcontext.Add(product4);
 
            Product product5 = new Product();
@@ -84,6 +88,7 @@ namespace NETCORE_CA_8A.DB
            product5.description = "Logs and aggregates events easily in your .NET apps";
            product5.unitPrice = 49.00;
            product5.CategoryId = cat1.Id;
+           product5.Image="http://localhost/lib/images/Logger.JPG";
            dbcontext.Add(product5);
 
            Product product6 = new Product();
@@ -92,6 +97,7 @@ namespace NETCORE_CA_8A.DB
            product6.description = "Powerful numerical methods for your .NET simulations";
            product6.unitPrice = 199.00;
            product6.CategoryId = cat1.Id;
+           product6.Image="http://localhost/lib/images/numerics.JPG";
            dbcontext.Add(product6);
 
            Product product7 = new Product();
