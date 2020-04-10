@@ -81,7 +81,7 @@ namespace NETCORE_CA_8A
                
             });
             dbcontext.Database.EnsureDeleted();
-             dbcontext.Database.EnsureCreated();
+            dbcontext.Database.EnsureCreated();
 
             new DBSeeder(dbcontext);
             new DBTester(dbcontext);
