@@ -27,8 +27,9 @@ namespace NETCORE_CA_8A.DB
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Cart { get; set; }
 
-        public DbSet<Purchase> Purchase { get; set; }
-        public DbSet<NETCORE_CA_8A.Models.Purchase> Order { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
+        public DbSet<Purchased> Purchased { get; set; }
+
     }
 }
 

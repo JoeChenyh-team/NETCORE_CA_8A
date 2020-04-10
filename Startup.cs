@@ -28,11 +28,24 @@ namespace NETCORE_CA_8A
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews();
+            services.AddRazorPages();
+
             services.AddDbContext<StoreDbContext>(opt =>
                opt.UseLazyLoadingProxies()
                .UseSqlServer(Configuration.GetConnectionString("DbConn")));
+
             services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +69,7 @@ namespace NETCORE_CA_8A
             app.UseAuthorization();
             app.UseSession();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -64,6 +78,7 @@ namespace NETCORE_CA_8A
                 endpoints.MapControllerRoute(
                    name: "add",
                    pattern: "{controller=Home}/{action=Gallery}/{username?}");
+               
             });
             dbcontext.Database.EnsureDeleted();
              dbcontext.Database.EnsureCreated();

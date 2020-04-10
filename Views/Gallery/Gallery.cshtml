@@ -6,6 +6,15 @@
     Layout = "_galleryLayout";
     string uname = (string)ViewData["username"];
 }
+
+@section Scripts
+{
+    <script>
+        var updateCart = function (url) {
+            $("#cartButton").load(url);
+        };
+    </script>
+}
 <h1>@ViewData["_galleryLayout"]</h1>
 
 <p>Welcome to T8A SoftStore's Product Gallery</p>
@@ -25,36 +34,40 @@
 @{
     if (@ViewBag.search == "not found")
     {
-    <p>Sorry! Product is not found...</p>
+        <p>Sorry! Product is not found...</p>
     }
 
 
 
     else
     {
-    <p>Search term: </p>
+        <p>Search term: </p>
 
-        {@: @ViewBag.keyword}
+        {@: @ViewBag.keyword
 
-            foreach (Product product in @ViewBag.products)
-            {
+        }
 
-    <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
+        foreach (Product product in @ViewBag.products)
+        {
+            var str = "/Cart/AddtoCart";
+<div class="gallery_product col-lg-3 col-md-4 col-xs-6">
+    <form action=@str class="form-inline">
         <div><h4 class="title">@product.productName</h4></div>
         <div><p class="desc">@product.description</p></div>
         <div>Price: $@product.unitPrice</div>
-        <div><button class="btn-primary" onclick="updateCart(@Html.Raw("'" + "/Cart/AddToCart?productId=" + @product.Id + "'"))">Add to Cart</button></div>
+        <input name="productId" type="hidden" value="@product.Id" />
+        <input class="button-primary" type="submit" value="Add To Cart">
         <p>
         <p>
         </p>
-       
-    </div>
+    </form>
+</div>
 
 
 
-                }
-            }
         }
     }
+}
+}
 
 

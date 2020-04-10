@@ -2,139 +2,149 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
+using NETCORE_CA_8A.DB;
 using NETCORE_CA_8A.Models;
 
 namespace NETCORE_CA_8A.Controllers
 {
     public class CartController : Controller
     {
-        // GET: Cart
-        public ActionResult Index()
+        protected StoreDbContext db;
+        private readonly ILogger<CartController> _logger;
+
+        public CartController(StoreDbContext dbcontext, ILogger<CartController> logger)
         {
+            db = dbcontext;
+            _logger = logger;
+        }
+        public ActionResult AddtoCart(string productId)
+        {
+            ViewBag.ItemCount = AddItemToCart(productId, 1);
+            return PartialView("_cartLogo");
+        }
+
+        public ActionResult Cart()
+        {
+            ViewBag.ItemCount = GetItemCount();
+            ViewBag.CartItems = GetAllCartItems();
             return View();
         }
 
-        public ActionResult AddtoCart(string id)
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public int AddItemToCart(string productId, int quantity)
         {
-            Product product = new Product();
-            
-            ProductModel productModel = new ProductModel();
-            if (HttpContext.Session.GetString("cart") == null)
+            // int userId = HttpContext.Session.GetInt32("UserId");
+            int userId = 1;
+            using (IDbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
-                List<Item> cart = new List<Item>();
-                cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
-                //HttpContext.Session.Set("cart", cart);
-                //HttpContext.Session.SetComplexData("cart", cart);
-                //HttpContext.Session.SetObject("cart", cart);
-                //HttpContext.Session["cart"] = cart;
-                //HttpContext.Session.Set<Item>("cart", cart);
-                ViewBag.cart = cart;
-            }
-            else
-            {
-                // List<Item> cart = (List<Item>)Session["cart"];
-                List<Item> cart = ViewBag.cart;
-                 int index = isExist(id);
-                if (index != -1)
+                Cart cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
+                try
                 {
-                    cart[index].Quantity++;
+                    if (cart == null)
+                    {
+                        cart = new Cart(userId);
+                        db.Cart.Add(cart);
+                        db.SaveChanges();
+                    }
+
+                    // Product product = db.Products.FirstOrDefault(x => x.Id == productId);
+                    Product product = db.Products
+                             .Where(x => x.Id == productId)
+                             .FirstOrDefault();
+
+                    if (product == null)
+                    {
+                        throw new Exception("Product not exists");
+                    }
+
+                    CartItem cartItem = db.CartItem.FirstOrDefault(x => x.CartId == cart.Id && x.ProductId == productId);
+
+                    if (cartItem == null)
+                    {
+                        cartItem = new CartItem(cart.Id, productId);
+                        db.CartItem.Add(cartItem);
+                       db.SaveChanges();
+                    }
+                    else
+                    {
+                        cartItem.Quantity += quantity;
+                    }
+
+                    if (cartItem.Quantity == 0)
+                    {
+                        db.CartItem.Remove(cartItem);
+                        db.SaveChanges();
+                    }
+
+                    cart.Quantity += quantity;
+                    cart.Value += quantity * product.unitPrice;
+
+                    db.SaveChanges();
+                    dbTransaction.Commit();
+                    return cart.Quantity;
                 }
-                else
+                catch (Exception e)
                 {
-                    cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
+                    dbTransaction.Rollback();
+                    throw new Exception(e.Message);
                 }
-                //Session["cart"] = cart;
-                ViewBag.cart = cart;
             }
-            return RedirectToAction("Index");
         }
 
-        private int isExist(string id)
+
+        public List<CartItem> GetAllCartItems()
         {
-            //List<Item> cart = (List<Item>)Session["cart"];
-            List<Item> cart = ViewBag.cart;
-            for (int i = 0; i < cart.Count; i++)
-                if (cart[i].Product.Id.Equals(id))
-                    return i;
-            return -1;
+            // int userId = HttpContext.Session.GetInt32("UserId");
+            int userId = 1;
+            var query = db.Cart.Where(cart => cart.CustomerId == userId && cart.IsCheckOut == 0).Select(cart => cart.Id).FirstOrDefault();
+            return GetCartItems(query);
         }
 
-        // GET: Cart/Details/5
-        public ActionResult Details(int id)
+        public int GetItemCount()
         {
-            return View();
-        }
+            //int userId = (int)HttpContext.Session["UserId"];
+            int userId = 1;
+            Cart cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
 
-        // GET: Cart/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Cart/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            if (cart == null)
             {
-                // TODO: Add insert logic here
+                cart = new Cart(userId);
+                db.Cart.Add(cart);
+                db.SaveChanges();
+                return 0;
+            }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return cart.Quantity;
         }
-
-        // GET: Cart/Edit/5
-        public ActionResult Edit(int id)
+        public List<CartItem> GetCartItems(int cartId)
         {
-            return View();
-        }
+            var query = db.CartItem.Where(cartItem => cartItem.CartId == cartId)
+                    .Join(db.Products, item => item.ProductId, product => product.Id,
+                        (item, product) => new
+                        {
+                            Id = item.Id,
+                            CartId = item.CartId,
+                            ProductId = product.Id,
+                            Quantity = item.Quantity,
+                            Product = product,
+                            CheckoutTime = db.Cart.Where(cart => cart.Id == cartId).Select(cart => cart.CheckoutTime).FirstOrDefault(),
+                            ActivationCodes = db.Purchased.Where(p => p.CartItemId == item.Id).Select(p => p.ActivationCode).ToList()
+                        }).ToList();
 
-        // POST: Cart/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            return query.Select(x => new CartItem
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Cart/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Cart/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Id = x.Id,
+                CartId = x.CartId,
+                ProductId = (x.Id).ToString(),
+                Quantity = x.Quantity,
+                Product = x.Product,
+                CheckoutTime = x.CheckoutTime,
+                ActivationCodes = x.ActivationCodes
+            }).ToList();
         }
     }
 }

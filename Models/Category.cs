@@ -16,5 +16,7 @@ namespace NETCORE_CA_8A.Models
         [Required]
         [MaxLength(100)]
         public string catName { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

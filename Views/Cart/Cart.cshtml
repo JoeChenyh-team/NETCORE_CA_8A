@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Cart";
+    Layout = "_galleryLayout";
+}
+
+<h2>Cart</h2>
+
+@using NETCORE_CA_8A.Models;
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Desc</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            @{
+                decimal cost = 0;
+                foreach (CartItem cartItem in @ViewBag.CartItems)
+                {
+                        <tr>
+                            <td><img src=@("http://fakeimg.pl/150x150/?text="+@cartItem.Product.productName) class="img-responsive"></td>
+                            <td>@cartItem.Product.productName</td>
+                            <td>@cartItem.Product.description\</td>
+                            <td>@cartItem.Quantity</td>
+                            <td>@cartItem.Product.unitPrice</td>
+                            <td><a href=@("" + @cartItem.Product.Id)><span class="glyphicon glyphicon-plus"></span></a></td>
+
+                            <td><a href=@("" + @cartItem.Product.Id)><span class="glyphicon glyphicon-minus"></span></a></td>
+                        </tr>
+                    cost += @cartItem.Quantity * @cartItem.Product.unitPrice;
+                }
+                <td><a href="/Gallery/Gallery"><button class="btn btn-default">Continue Shopping</button></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>@("Total $" + @cost)</strong></td>
+                <td>
+                    @if (cost != 0)
+                    {
+                        <a href="/Cart/CheckoutCart"><button class="btn btn-primary">Checkout</button></a>
+                    }
+                </td>
+            }
+        </table>
+    </div>
+</div>

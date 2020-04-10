@@ -33,6 +33,7 @@ namespace NETCORE_CA_8A.Controllers
             string hashPassword = Utils.Crypto.Sha256(password);
             
             HttpContext.Session.SetString("username", username);
+            HttpContext.Session.SetInt32("UserId", 1);
 
             if (CheckAuthentication(username, hashPassword))
                 //return RedirectToAction("Gallery","Home");
@@ -54,6 +55,7 @@ namespace NETCORE_CA_8A.Controllers
 
         }
 
+        
         
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
