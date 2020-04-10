@@ -26,7 +26,7 @@
             <th>Quantity</th>
             <th>Sub Total</th>
         </tr>
-        @foreach (Item item in ViewBag.cart)
+        @foreach (var item in ViewBag.cart)
         {
             <tr>
                 <td><a href="@Url.Action("Remove", "Cart", new { id = item.Product.Id })">Remove</a></td>
