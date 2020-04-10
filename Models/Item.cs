@@ -19,5 +19,6 @@ namespace NETCORE_CA_8A.Models
                 set;
             }
 
+
         }
 }

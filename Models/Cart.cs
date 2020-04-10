@@ -9,44 +9,29 @@ namespace NETCORE_CA_8A.Models
 {
     public class Cart
     {
-        //Joe: insert AppDB Service?? Not sure how to do it but I copy this from online. 
-        /*
-        private readonly AppDbContext _appDbContext;
-        private Cart(AppDbContext appDbContext)
-        {
-            _appDbContext = appDbContext;
-        }
-        */
+        public int Id { get; set; }
+        public int CustomerId { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime CreationTime { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime CheckoutTime { set; get; }
+        public int IsCheckOut { get; set; }
 
-
-        [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Id { get; set; }
-
-        
-
-        [Required]
-        [MaxLength(3)]
         public int Quantity { get; set; }
+        public decimal Value { get; set; }
+        public virtual ICollection<CartItem> CartItems { get; set; }
 
-        [Required]
-        [MaxLength(36)]
-        public System.DateTime DateCreated { get; set; }
+        public Cart()
+        {
+        }
 
-        [MaxLength(36)]
-        public string CustomerId { get; set; }
-
-
-        [Required]
-        [MaxLength(36)]
-        public int ProductId { get; set; }
-
-
-
-        public virtual Product Product { get; set; }
-        public virtual Customer Customer { get; set; }
-
-        
-
+        public Cart(int customerId)
+        {
+            this.CustomerId = customerId;
+            this.CreationTime = DateTime.Now;
+            this.IsCheckOut = 0;
+        }
     }
+
+    
 }

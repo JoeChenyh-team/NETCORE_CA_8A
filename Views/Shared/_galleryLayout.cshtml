@@ -6,9 +6,9 @@
     <title>@ViewData["Title"] - NETCORE_CA_8A</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    
 
-  
+
+
 </head>
 <body>
 
@@ -32,8 +32,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Purchase" asp-action="Purchase"><b>Purchase History </b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index"><b>View Cart </b></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index"><b>View Cart</b></a>
                         </li>
+                        <li class="nav-item" style="float: right !important;">@await Html.PartialAsync("_cartLogo"))</li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout"><b> Logout </b></a>
                         </li>

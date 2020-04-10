@@ -22,46 +22,14 @@ namespace NETCORE_CA_8A.DB
         {
         }
 
-        
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-
-      /*  public DbSet<ProductModel> ProductModel { get; set; } */
         public DbSet<Cart> Cart { get; set; }
 
-        public DbSet<Purchase> Purchase { get; set; }
-        
+        public DbSet<CartItem> CartItem { get; set; }
+        public DbSet<Purchased> Purchased { get; set; }
+
     }
 }
 
-/*
- For reference only
- public DbSet<Category> Categories { get; set; }
-    public DbSet<Product> Products { get; set; }
-    public DbSet<CartItem> ShoppingCartItems { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderDetail> OrderDetails { get; set; }
-*/
-
-/*
- * public class BookingContext : DbContext
-{
-    protected IConfiguration configuration;
-
-    public BookingContext(DbContextOptions<BookingContext> options)
-        : base(options)
-    {
-    }
-
-    protected override void OnModelCreating(ModelBuilder model)
-    {
-        // unique name within a column
-        model.Entity<Cinema>().HasIndex(tbl => tbl.Name).IsUnique();
-
-        // composite keys
-        model.Entity<Seat>().HasAlternateKey(tbl =>
-            new { tbl.ScreeningId, tbl.Row, tbl.Col }
-        );
-    }
-    */

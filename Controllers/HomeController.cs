@@ -31,33 +31,17 @@ namespace NETCORE_CA_8A.Controllers
         public IActionResult Login(string username, string password)
         {
             string hashPassword = Utils.Crypto.Sha256(password);
-
+            
             HttpContext.Session.SetString("username", username);
-            //2 lines added by Joe:
-           /* HttpContext.Session.SetString("run", "");
-            HttpContext.Session.SetInt32("number", 1); */
+            HttpContext.Session.SetInt32("UserId", 1);
 
             if (CheckAuthentication(username, hashPassword))
                 //return RedirectToAction("Gallery","Home");
-                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username});
-                
+                return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
+
             else
                 return View("Index", "Home");
         }
-
-        // added by Joe, refer Tin's slide number 38 
-        /*
-        public ActionResult Track(string cmd)
-        {
-            string usernameInSession = HttpContext.Session.GetString("username");
-
-            if (usernameInSession == null)
-                return RedirectToAction("Index", "Home");
-
-            return //View("Index");
-            RedirectToRoute(new { controller = "Gallery", action = "Gallery" , username = "username" });
-        }
-        */
 
         public bool CheckAuthentication(string name, string password)
         {
@@ -71,6 +55,7 @@ namespace NETCORE_CA_8A.Controllers
 
         }
 
+        
         
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

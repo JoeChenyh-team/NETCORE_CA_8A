@@ -23,13 +23,24 @@ namespace NETCORE_CA_8A.Models
 
         [Required]
         [MaxLength(3)]
-        public double unitPrice { get; set; }
+        public decimal unitPrice { get; set; }
 
         [Required]
         [MaxLength(36)]
         public string CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public Product()
+        {
+        }
+
+        public Product(string name, string desc, int quantity, decimal price)
+        {
+            this.productName = name;
+            this.description = desc;
+            this.unitPrice = price;
+        }
     }
 }
 
