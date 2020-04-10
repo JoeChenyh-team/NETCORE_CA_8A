@@ -23,6 +23,8 @@ namespace NETCORE_CA_8A.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
+        
+
         [Required]
         [MaxLength(3)]
         public int Quantity { get; set; }
