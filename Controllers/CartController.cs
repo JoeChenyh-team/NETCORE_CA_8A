@@ -90,7 +90,7 @@ namespace NETCORE_CA_8A.Controllers
                     }
 
                     cart.Quantity += quantity;
-                    cart.Value += quantity * product.unitPrice;
+               /*     cart.Value += quantity * product.unitPrice;  temporarily hide*/
 
                     db.SaveChanges();
                     dbTransaction.Commit();

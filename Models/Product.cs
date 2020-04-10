@@ -17,13 +17,17 @@ namespace NETCORE_CA_8A.Models
         [MaxLength(100)]
         public string productName { get; set; }
 
+    
+        [MaxLength(300)]
+        public string productLongDesc { get; set; }
+
         [Required]
         [MaxLength(200)]
         public string description { get; set; }
 
         [Required]
         [MaxLength(3)]
-        public decimal unitPrice { get; set; }
+        public double unitPrice { get; set; }
 
         [Required]
         [MaxLength(36)]
@@ -40,12 +44,15 @@ namespace NETCORE_CA_8A.Models
 
         public string Image { get; set; }
 
-        public Product(string name, string desc, int quantity, decimal price)
+        public Product(string name, string desc, int quantity, double price)
         {
             this.productName = name;
             this.description = desc;
             this.unitPrice = price;
         }
+
+        public string Recommendation { get; set; }
+        public string Review { get; set; }
     }
 }
 

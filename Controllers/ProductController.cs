@@ -43,9 +43,11 @@ namespace NETCORE_CA_8A.Controllers
         public IActionResult View2(string newid)
         {
             ViewData["newid"] = newid;
-            ViewBag.products = GetAllProducts(newid);
-            
-            if (ViewBag.products.Count == 0)
+            ViewBag.Product = GetAllProducts(newid);
+            ViewBag.Recommendation = GetAllRecommend(newid);
+            ViewBag.Review = GetAllReview(newid);
+
+            if (ViewBag.Product.Count == 0)
             {
                 ViewBag.search = "not found";
             }
@@ -69,5 +71,42 @@ namespace NETCORE_CA_8A.Controllers
             return _dbcontext.Products.Where(p =>
                     p.Id.ToLower() == newid.ToLower()).ToList();
         }
+
+        public List<Recommendation> GetAllRecommend(string newid)
+        {
+            if (newid == "")
+            {
+                return _dbcontext.Recommendation.ToList();
+            }
+
+            if (newid == null)
+            {
+                return _dbcontext.Recommendation.ToList();
+            }
+
+
+
+            return _dbcontext.Recommendation.Where(p =>
+                    p.ProductId.ToLower() == newid.ToLower()).ToList();
+        }
+
+        public List<Review> GetAllReview(string newid)
+        {
+            if (newid == "")
+            {
+                return _dbcontext.Review.ToList();
+            }
+
+            if (newid == null)
+            {
+                return _dbcontext.Review.ToList();
+            }
+
+
+
+            return _dbcontext.Review.Where(p =>
+                    p.ProductId.ToLower() == newid.ToLower()).ToList();
         }
     }
+}
+   

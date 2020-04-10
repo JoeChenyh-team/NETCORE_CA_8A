@@ -7,19 +7,26 @@ using System.Threading.Tasks;
 
 namespace NETCORE_CA_8A.Models
 {
-    public class Reviews
+    public class Review
     {
         [MaxLength(36)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
         [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ProductId { get; set; }
 
         [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CustomerId { get; set; }
+
+        [MaxLength(36)]
+        public int Stars { get; set; }
+
+        [MaxLength(36)]
+        public string Comments { get; set; }
+
+        public virtual Customer customer { get; set; }
+        public virtual Product product { get; set; }
 
 
     }

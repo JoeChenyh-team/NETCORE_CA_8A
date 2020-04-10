@@ -21,10 +21,9 @@ namespace NETCORE_CA_8A.Models
         
 
         [MaxLength(36)] 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] 
         public string Id { get; set; }
 
-        [Required]
+        
         [MaxLength(36)]
         public string CartId { get; set; }
 
