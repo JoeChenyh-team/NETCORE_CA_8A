@@ -58,7 +58,43 @@ namespace NETCORE_CA_8A.Models
     return new ShoppingCart(context) {CartId = cartId);
     }
     */
-     
+
+
+
+        /* 
+      public void AddToCart(Product product, int quantity)
+      {
+      var CartItem = 
+      _appDbContext.CartItems.SingleOrDefault( s => s.Product.ProductId == product.ProductId && s.CartId == CartId )
+
+        if (CartItem == null)
+        {
+        CartItem = new CartItem 
+        {
+        CartId = CartId, 
+        Product = product, 
+        ProductQty = 1
+        };
+
+        _appDbContext.CartItems.Add(CartItem);
+        }
+        else
+        {
+        CartItem.ProductQty++;
+        }
+        _appDbContext.SaveChanges();
+        }
+    */
+
+        /* public void ClearCart()
+         {
+         var CartItems = _appDbContext
+         .ShoppingCartItems 
+         .Where(cart => cart.CartId == CartId);
+
+    _appDbContext.CartItems.RemoveRange(cartItems);
+    _appDbContext.SaveChanges();
+     */
     
     }
 
