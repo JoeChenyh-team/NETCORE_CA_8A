@@ -36,7 +36,7 @@ purchase1.CustomerId = cust1.Id;
             purchase1.PurchaseKey = "12345";
             dbcontext.Add(purchase1); */
 
-        public IActionResult Purchase(string customerid)
+        public IActionResult Purchase(int customerid)
         {
             HttpContext.Session.GetString("CustomerId");
             ViewData["CustomerId"] = "0002";
@@ -45,7 +45,7 @@ purchase1.CustomerId = cust1.Id;
             return View();
         }
         
-        public List<Purchase> GetAllPurchases(string customerid)
+        public List<Purchase> GetAllPurchases(int customerid)
         {
             List<Purchase> purchase;
 
