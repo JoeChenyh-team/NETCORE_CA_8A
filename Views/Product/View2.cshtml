@@ -31,7 +31,7 @@
 <br />
 
 
-@{
+@{ 
     if (@ViewBag.search == "not found")
     {
         <p>Sorry! Product is not found...</p>
@@ -54,28 +54,31 @@
                     <div>Price: $@product.unitPrice</div><p></p>
                     <input name="productId" type="hidden" value="@product.Id" />
                     <input class="button-primary" type="submit" value="Add To Cart">
+                    </form></div>
                     <div></div>
                     <td></td>
                     <td></td>
                     <div><p class="longdesc">More information: @product.productLongDesc</p></div>
 
-                    @{ foreach (var recommendation in @ViewBag.Recommendation)
-                        {
+                     @foreach (var recommendation in @ViewBag.Recommendation)
+                     {
                             <div><p class="title">@recommendation.recommendedproduct1.ProductName</p></div>
                             <div><p class="title">@recommendation.recommendedproduct2.ProductName</p></div>
                             <div><p class="title">@recommendation.recommendedproduct3.ProductName</p></div>
                             <p>
                             </p>
 
+                     }
 
-
-                            @{ foreach (var review in ViewBag.Review)
-                                {<div><p class="title">Review ID: @review.Id</p></div>
+                     @foreach (var review in ViewBag.Review)
+                     {<div><p class="title">Review ID: @review.Id</p></div>
                                 <div><p class="comments">Comments: @review.Comments</p></div>
                                 <div><p class="stars">Number of stars: @review.Stars</p></div>
                                 <p>
                                 </p>
+                     }
 
 
-                            }
-
+            }
+        }
+    }
