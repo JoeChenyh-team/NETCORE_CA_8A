@@ -41,7 +41,7 @@
 
     else
     {
-        <p>Search term: </p>
+        
 
         {@: @ViewBag.keyword
 
@@ -55,7 +55,7 @@
         <div><h4 class="title">@product.productName</h4></div>
         <div><p class="desc">@product.description</p></div>
         <div>Price: $@product.unitPrice</div>
-        <img src="~/lib/images/@product.Image" width="42" height="42">
+        <img src="@product.Image" width="42" height="42">
         <input name="productId" type="hidden" value="@product.Id" />
         <input class="button-primary" type="submit" value="Add To Cart">
         <p>
