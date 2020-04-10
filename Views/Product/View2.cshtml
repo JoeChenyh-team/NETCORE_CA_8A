@@ -16,7 +16,6 @@
         };
     </script>
 }
-<h1>@ViewData["_galleryLayout"]</h1>
 
 
 
@@ -67,7 +66,7 @@
                 <img src="@product.Image" width="120" height="120"><p></p>
                 <div>Price: $@product.unitPrice</div><p></p>
                 <input name="productId" type="hidden" value="@product.Id" />
-
+                <input name="fromProdDetail" type="hidden" value="true" />
                 <input class="button-primary" type="submit" value="Add To Cart">
                 <div></div>
                 <div></div>

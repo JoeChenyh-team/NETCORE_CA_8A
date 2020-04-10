@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -23,8 +24,11 @@ namespace NETCORE_CA_8A.Controllers
             _dbcontext = dbcontext;
             _logger = logger;
         }
-        public IActionResult Gallery(string username,string keyword="")
+        public IActionResult Gallery(string username, int itemCount=0,string keyword="")
         {
+            ViewBag.ItemCount = itemCount;
+            ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
+            ViewBag.Username = (string)HttpContext.Session.GetString("Username");
             ViewData["username"] = username;
             ViewBag.products = GetAllProducts(keyword);
             if(ViewBag.products.Count==0)

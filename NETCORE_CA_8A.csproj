@@ -34,10 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\lib\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="wwwroot\lib\images\Analytics.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

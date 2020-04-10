@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
@@ -14,16 +15,24 @@ namespace NETCORE_CA_8A.Controllers
     {
         protected StoreDbContext db;
         private readonly ILogger<CartController> _logger;
+        
 
         public CartController(StoreDbContext dbcontext, ILogger<CartController> logger)
         {
             db = dbcontext;
             _logger = logger;
         }
-        public ActionResult AddtoCart(string productId)
+        public ActionResult AddtoCart(string productId,string fromProdDetail="")
         {
+            ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
+            ViewBag.Username = (string)HttpContext.Session.GetString("Username");
             ViewBag.ItemCount = AddItemToCart(productId, 1);
-            return PartialView("_cartLogo");
+            //return PartialView("_cartLogo");
+            if(fromProdDetail == "true")
+            {
+                return RedirectToRoute(new { controller = "Product", action = "View2", itemCount = ViewBag.ItemCount });
+            }
+            return RedirectToRoute(new { controller = "Gallery", action = "Gallery", itemCount = ViewBag.ItemCount });
         }
 
         public ActionResult Cart()

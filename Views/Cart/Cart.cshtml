@@ -24,12 +24,13 @@
                 decimal cost = 0;
                 foreach (CartItem cartItem in @ViewBag.CartItems)
                 {
+                    var subSum = @cartItem.Quantity * @cartItem.Product.unitPrice;
                         <tr>
                             <td><img src=@("http://fakeimg.pl/150x150/?text="+@cartItem.Product.productName) class="img-responsive"></td>
                             <td>@cartItem.Product.productName</td>
                             <td>@cartItem.Product.description\</td>
                             <td>@cartItem.Quantity</td>
-                            <td>@cartItem.Product.unitPrice</td>
+                            <td>@subSum</td>
                             <td><a href=@("" + @cartItem.Product.Id)><span class="glyphicon glyphicon-plus"></span></a></td>
 
                             <td><a href=@("" + @cartItem.Product.Id)><span class="glyphicon glyphicon-minus"></span></a></td>
