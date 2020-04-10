@@ -22,7 +22,7 @@ namespace NETCORE_CA_8A.DB
             dbcontext.Add(cust1);
 
             Customer cust2 = new Customer();
-            cust2.Id = 2;
+            cust2.Id = "0001";
             cust2.Name = "joe";
             cust2.Password = Utils.Crypto.Sha256(cust2.Name);
             dbcontext.Add(cust2);
@@ -118,16 +118,17 @@ namespace NETCORE_CA_8A.DB
            product9.CategoryId = cat2.Id;
            dbcontext.Add(product9);
 
-            /*  Purchase purchase1 = new Purchase();
+            Purchase purchase1 = new Purchase();
             purchase1.OrderId = Guid.NewGuid().ToString();
             purchase1.CustomerId = cust2.Id;
             purchase1.ProductId = product1.Id;
-            purchase1.ProductName = product1.productName;
-            purchase1.ProductQty = 1;
-            purchase1.PurchaseDate = "03-03-2020";
-            purchase1.PurchaseKey = "12345";
+            purchase1.PurchaseQty = 1;
+            purchase1.UTCPurchaseDate = new DateTime(2015, 12, 25);
+            purchase1.ActivationKey = "12345";
             dbcontext.Add(purchase1);
 
+
+            /*
             Product product10 = new Product();
             product7.Id = Guid.NewGuid().ToString();
             product7.productName = "";
@@ -142,3 +143,13 @@ namespace NETCORE_CA_8A.DB
         }
     }
 }
+
+/*  For reference (from Wing Tips project): 
+   public class ProductDatabaseInitializer : DropCreateDatabaseAlways<ProductContext>
+  {
+    protected override void Seed(ProductContext context)
+    {
+      GetCategories().ForEach(c => context.Categories.Add(c));
+      GetProducts().ForEach(p => context.Products.Add(p));
+    }
+    */
