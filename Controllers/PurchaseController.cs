@@ -36,18 +36,18 @@ purchase1.CustomerId = cust1.Id;
             purchase1.PurchaseKey = "12345";
             dbcontext.Add(purchase1); */
 
-        public IActionResult Purchase(string username)
+        public IActionResult Purchase(string customerid)
         {
-            HttpContext.Session.GetString("username");
-            ViewData["username"] = username;
-            ViewBag.Purchases = GetAllPurchases(username);
+            HttpContext.Session.GetString("CustomerId");
+            ViewData["CustomerId"] = "0002";
+            ViewBag.Purchases = GetAllPurchases("0002");
             
             return View();
         }
         
         public List<Purchase> GetAllPurchases(string customerid)
         {
-            List<Purchase> Purchases = new List<Purchase>();
+            List<Purchase> purchase;
 
             if (customerid == null)
             {
@@ -55,9 +55,19 @@ purchase1.CustomerId = cust1.Id;
             }
 
 
-            return _dbcontext.Purchase.ToList();
+            /*   return _dbcontext.Purchase.ToList(); */
+            purchase = _dbcontext.Purchase
+                    .Where(x => x.CustomerId == customerid)
+                    .ToList();
 
+            if (purchase == null)
 
+            {
+                return null;
+            }
+
+            
+            return purchase;
 
         }
     }

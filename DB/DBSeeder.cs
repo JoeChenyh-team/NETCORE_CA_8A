@@ -20,7 +20,7 @@ namespace NETCORE_CA_8A.DB
             dbcontext.Add(cust1);
 
             Customer cust2 = new Customer();
-            cust2.Id = "0001";
+            cust2.Id = "0002";
             cust2.Name = "joe";
             cust2.Password = Utils.Crypto.Sha256(cust2.Name);
             dbcontext.Add(cust2);
@@ -117,9 +117,8 @@ namespace NETCORE_CA_8A.DB
             Purchase purchase1 = new Purchase();
             purchase1.Id = Guid.NewGuid().ToString();
             purchase1.CartId = "001";
-            purchase1.CustomerId = cust2.Id;
+            purchase1.CustomerId = cust1.Id;
             purchase1.ProductId = product1.Id;
-           // purchase1.ProductName = (not sure what to type here) 
             purchase1.PurchaseQty = 1;
             purchase1.UTCPurchaseDate = new DateTime(2015, 12, 25);
             purchase1.ActivationKey = "12345";
@@ -128,9 +127,8 @@ namespace NETCORE_CA_8A.DB
             Purchase purchase2 = new Purchase();
             purchase1.Id = Guid.NewGuid().ToString();
             purchase1.CartId = "002";
-            purchase1.CustomerId = cust1.Id;
+            purchase1.CustomerId = "0002";
             purchase1.ProductId = product1.Id;
-           // purchase1.ProductName = product1.productName;
             purchase1.PurchaseQty = 1;
             purchase1.UTCPurchaseDate = new DateTime(2015, 12, 25);
             purchase1.ActivationKey = "12345";
