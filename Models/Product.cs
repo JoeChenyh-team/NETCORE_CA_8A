@@ -35,6 +35,9 @@ namespace NETCORE_CA_8A.Models
         {
         }
 
+        //joe testing out
+        public string URL { get; set; }
+
         public string Image { get; set; }
 
         public Product(string name, string desc, int quantity, decimal price)

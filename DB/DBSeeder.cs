@@ -52,6 +52,7 @@ namespace NETCORE_CA_8A.DB
            product1.unitPrice = (decimal)99.00;
            product1.CategoryId = cat1.Id;
            product1.Image = "https://localhost:44331/lib/images/Charts.JPG";
+            product1.URL = "https://localhost:44331/Product/View/product1";
            dbcontext.Add(product1);
 
            Product product2 = new Product();
@@ -62,7 +63,8 @@ namespace NETCORE_CA_8A.DB
            product2.unitPrice = (decimal)69.00;
            product2.CategoryId = cat1.Id;
             product2.Image = "https://localhost:44331/lib/images/Paypal.JPG";
-           dbcontext.Add(product2);
+            product2.URL = "https://localhost:44331/Product/View/product2";
+            dbcontext.Add(product2);
 
             /* Product product3 = new Product();
              product3.Id = Guid.NewGuid().ToString();
@@ -71,6 +73,7 @@ namespace NETCORE_CA_8A.DB
              product3.unitPrice = 299.00;
              product3.CategoryId = cat1.Id;
              product3.Image = "https://localhost:44331/lib/images/ML.JPG";
+             product3.URL = "https://localhost:44331/Product/View/product3";
              dbcontext.Add(product3);
 
              Product product4 = new Product();
@@ -80,6 +83,7 @@ namespace NETCORE_CA_8A.DB
              product4.unitPrice = 299.00;
              product4.CategoryId = cat1.Id;
              product4.Image = "https://localhost:44331/lib/images/Analytics.JPG";
+             product4.URL = "https://localhost:44331/Product/View/product4";
              dbcontext.Add(product4);
 
              Product product5 = new Product();
@@ -89,6 +93,7 @@ namespace NETCORE_CA_8A.DB
              product5.unitPrice = 49.00;
              product5.CategoryId = cat1.Id;
              product5.Image = "https://localhost:44331/lib/images/Logger.JPG";
+             product5.URL = "https://localhost:44331/Product/View/product5";
              dbcontext.Add(product5);
 
              Product product6 = new Product();
@@ -98,6 +103,7 @@ namespace NETCORE_CA_8A.DB
              product6.unitPrice = 199.00;
              product6.CategoryId = cat1.Id;
              product6.Image = "https://localhost:44331/lib/images/numerics.JPG";
+             product6.URL = "https://localhost:44331/Product/View/product6";
              dbcontext.Add(product6);
 
              Product product7 = new Product();

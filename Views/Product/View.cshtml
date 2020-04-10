@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model Product;
+
+@{
+    ViewData["Title"] = "Gallery";
+    Layout = "_galleryLayout";
+    string uname = (string)ViewData["username"];
+}
+
+@section Scripts
+{
+    <script>
+        var updateCart = function (url) {
+            $("#cartButton").load(url);
+        };
+    </script>
+}
+<h1>@ViewData["_galleryLayout"]</h1>
+
+<p>Welcome to T8A SoftStore's Product Gallery</p>
+<div align="center">
+    <form action="/Gallery/Gallery" class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control input-sm" minlength="1" maxlength="64" placeholder="Search for product" name="keyword" value=@(ViewBag.keyword)>
+        </div>
+        <div class="form-group">
+            <input class="button-primary" type="submit" value="Search">
+        </div>
+    </form>
+</div>
+<br />
+
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.productName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.productName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.unitPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.unitPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Look for another product</a> |
+    <a asp-action="Index">Back to Gallery</a>
+</div>

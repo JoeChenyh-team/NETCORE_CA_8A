@@ -78,7 +78,10 @@ namespace NETCORE_CA_8A
                 endpoints.MapControllerRoute(
                    name: "add",
                    pattern: "{controller=Home}/{action=Gallery}/{username?}");
-               
+                endpoints.MapControllerRoute(
+                  name: "add1",
+                  pattern: "{controller=Product}/{action=View}/{product?}");
+
             });
             dbcontext.Database.EnsureDeleted();
             dbcontext.Database.EnsureCreated();
