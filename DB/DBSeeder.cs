@@ -151,3 +151,13 @@ namespace NETCORE_CA_8A.DB
         }
     }
 }
+
+/*  For reference (from Wing Tips project): 
+   public class ProductDatabaseInitializer : DropCreateDatabaseAlways<ProductContext>
+  {
+    protected override void Seed(ProductContext context)
+    {
+      GetCategories().ForEach(c => context.Categories.Add(c));
+      GetProducts().ForEach(p => context.Products.Add(p));
+    }
+    */
