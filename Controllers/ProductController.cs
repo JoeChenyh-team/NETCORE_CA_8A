@@ -44,6 +44,8 @@ namespace NETCORE_CA_8A.Controllers
         {
             ViewData["newid"] = newid;
             ViewBag.products = GetAllProducts(newid);
+            ViewBag.Recommendation = GetAllRecommend(newid);
+            ViewBag.Review = GetAllReview(newid);
 
             if (ViewBag.products.Count == 0)
             {
@@ -69,42 +71,6 @@ namespace NETCORE_CA_8A.Controllers
             return _dbcontext.Products.Where(p =>
                     p.Id.ToLower() == newid.ToLower()).ToList();
         }
-    }
-
-    public class RecommendationController : Controller
-    {
-
-
-        protected StoreDbContext _dbcontext;
-
-        private readonly ILogger<RecommendationController> _logger;
-
-        public RecommendationController(StoreDbContext dbcontext, ILogger<RecommendationController> logger)
-        {
-            _dbcontext = dbcontext;
-            _logger = logger;
-        }
-
-        /* Purchase purchase1 = new Purchase();
-            purchase1.OrderId = Guid.NewGuid().ToString();
-purchase1.CustomerId = cust1.Id;
-            purchase1.ProductId = product1.Id;
-            purchase1.ProductQty = 1;
-            purchase1.PurchaseDate = "03/03/2020";
-            purchase1.PurchaseKey = "12345";
-            dbcontext.Add(purchase1); */
-
-        public IActionResult Recommend(string newid)
-        {
-            ViewData["newid"] = newid;
-            ViewBag.Recommendation = GetAllRecommend(newid);
-
-            if (ViewBag.Recommendation.Count == 0)
-            {
-                ViewBag.search = "not found";
-            }
-            return View();
-        }
 
         public List<Recommendation> GetAllRecommend(string newid)
         {
@@ -122,27 +88,6 @@ purchase1.CustomerId = cust1.Id;
 
             return _dbcontext.Recommendation.Where(p =>
                     p.ProductId.ToLower() == newid.ToLower()).ToList();
-        }
-    }
-
-    public class ReviewController : Controller
-    {
-
-
-        protected StoreDbContext _dbcontext;
-
-        private readonly ILogger<ReviewController> _logger;
-
-        public IActionResult Review(string newid)
-        {
-            ViewData["newid"] = newid;
-            ViewBag.Review = GetAllReview(newid);
-
-            if (ViewBag.Review.Count == 0)
-            {
-                ViewBag.search = "not found";
-            }
-            return View();
         }
 
         public List<Review> GetAllReview(string newid)
@@ -164,3 +109,4 @@ purchase1.CustomerId = cust1.Id;
         }
     }
 }
+   

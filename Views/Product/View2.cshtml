@@ -42,41 +42,40 @@
     else
     {
 
+        foreach (Product product in @ViewBag.Product)
+        {
+            var str = "/Cart/AddtoCart";
+            <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
+                <form action=@str class="form-inline">
+                    <div><h3 class="title">@product.productName</h3></div>
+                    <div><p class="desc">@product.description</p></div>
+                    <div></div>
+                    <img src="@product.Image" width="120" height="120"><p></p>
+                    <div>Price: $@product.unitPrice</div><p></p>
+                    <input name="productId" type="hidden" value="@product.Id" />
+                    <input class="button-primary" type="submit" value="Add To Cart">
+                    <div></div>
+                    <td></td>
+                    <td></td>
+                    <div><p class="longdesc">More information: @product.productLongDesc</p></div>
 
-        {@: @ViewBag.keyword
-
-
-    }
-
-    foreach (Product product in @ViewBag.products)
-    {
-        var str = "/Cart/AddtoCart";
-        <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
-            <form action=@str class="form-inline">
-                <div><h3 class="title">@product.productName</h3></div>
-
-                <div><p class="desc">@product.description</p></div>
-
-                <div></div>
-                <img src="@product.Image" width="120" height="120"><p></p>
-                <div>Price: $@product.unitPrice</div><p></p>
-                <input name="productId" type="hidden" value="@product.Id" />
-                <input class="button-primary" type="submit" value="Add To Cart">
-                <div></div><td></td>
-                <td></td>
-                <td></td>
-                <p>
-                <p>
-                </p>
-            </form>
-        </div>
+                    @{ foreach (var recommendation in @ViewBag.Recommendation)
+                        {
+                            <div><p class="title">@recommendation.recommendedproduct1.ProductName</p></div>
+                            <div><p class="title">@recommendation.recommendedproduct2.ProductName</p></div>
+                            <div><p class="title">@recommendation.recommendedproduct3.ProductName</p></div>
+                            <p>
+                            </p>
 
 
 
-    }
-}
-}
+                            @{ foreach (var review in ViewBag.Review)
+                                {<div><p class="title">Review ID: @review.Id</p></div>
+                                <div><p class="comments">Comments: @review.Comments</p></div>
+                                <div><p class="stars">Number of stars: @review.Stars</p></div>
+                                <p>
+                                </p>
 
 
-
+                            }
 

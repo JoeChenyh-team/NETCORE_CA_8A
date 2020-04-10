@@ -51,8 +51,8 @@ namespace NETCORE_CA_8A.Models
             this.unitPrice = price;
         }
 
-        public virtual Recommendation recommendation { get; set; }
-        public virtual Review review { get; set; }
+        public string Recommendation { get; set; }
+        public string Review { get; set; }
     }
 }
 
