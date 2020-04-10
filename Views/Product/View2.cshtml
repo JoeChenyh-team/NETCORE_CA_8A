@@ -1,11 +1,12 @@
-﻿@using Microsoft.AspNetCore.Http;
-@model Customer;
+﻿
+@model Product;
 
 @{
     ViewData["Title"] = "Gallery";
     Layout = "_galleryLayout";
-    string uname = (string)ViewData["username"];
+    
 }
+
 
 @section Scripts
 {
@@ -17,7 +18,9 @@
 }
 <h1>@ViewData["_galleryLayout"]</h1>
 
-<p>Welcome to T8A SoftStore's Product Gallery</p>
+
+
+<p>Welcome to T8A SoftStore's Product Gallery : Product Information</p>
 <div align="center">
     <form action="/Gallery/Gallery" class="form-inline">
         <div class="form-group">
@@ -75,6 +78,5 @@
         }
     }
 }
-
 
 
