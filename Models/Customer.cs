@@ -11,7 +11,7 @@ namespace NETCORE_CA_8A.Models
     {
         [MaxLength(36)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int Id {get; set; }
 
         public string Name { get; set; }
 

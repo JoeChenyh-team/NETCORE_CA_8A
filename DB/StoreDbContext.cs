@@ -28,6 +28,8 @@ namespace NETCORE_CA_8A.DB
         public DbSet<Cart> Cart { get; set; }
 
         public DbSet<CartItem> CartItem { get; set; }
+
+        public DbSet<Purchase> Purchase { get; set; }
         public DbSet<Purchased> Purchased { get; set; }
 
     }
