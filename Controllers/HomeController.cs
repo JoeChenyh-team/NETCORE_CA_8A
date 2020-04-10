@@ -39,13 +39,14 @@ namespace NETCORE_CA_8A.Controllers
 
             if (CheckAuthentication(username, hashPassword))
                 //return RedirectToAction("Gallery","Home");
-                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", custID = username });
+                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username});
                 
             else
                 return View("Index", "Home");
         }
 
         // added by Joe, refer Tin's slide number 38 
+        /*
         public ActionResult Track(string cmd)
         {
             string usernameInSession = HttpContext.Session.GetString("username");
@@ -54,8 +55,9 @@ namespace NETCORE_CA_8A.Controllers
                 return RedirectToAction("Index", "Home");
 
             return //View("Index");
-            RedirectToRoute(new { controller = "Gallery", action = "Gallery" /*, username = username*/ });
+            RedirectToRoute(new { controller = "Gallery", action = "Gallery" , username = "username" });
         }
+        */
 
         public bool CheckAuthentication(string name, string password)
         {

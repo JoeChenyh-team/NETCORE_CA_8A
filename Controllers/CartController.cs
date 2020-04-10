@@ -16,13 +16,15 @@ namespace NETCORE_CA_8A.Controllers
         {
             return View();
         }
-
+    }
+}
+        /*
         public ActionResult AddtoCart(string id)
         {
-            Product product = new Product();
+            Product product = new Product(); 
             
             ProductModel productModel = new ProductModel();
-            if (HttpContext.Session.GetString("cart") == null)
+            if (HttpContext.Session.GetString("cart") == null) 
             {
                 List<Item> cart = new List<Item>();
                 cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });

@@ -27,7 +27,7 @@ namespace NETCORE_CA_8A.DB
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<ProductModel> ProductModel { get; set; }
+      /*  public DbSet<ProductModel> ProductModel { get; set; } */
         public DbSet<Cart> Cart { get; set; }
 
         public DbSet<Purchase> Purchase { get; set; }
