@@ -14,7 +14,8 @@ namespace NETCORE_CA_8A.Models
         public Purchased()
         {
         }
-
+        public virtual CartItem CartItem { get; set; }
+        public virtual Purchase Purchase { get; set; }
         public Purchased(int cartItemId, string activationCode)
         {
             this.CartItemId = cartItemId;

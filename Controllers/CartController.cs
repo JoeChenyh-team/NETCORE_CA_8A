@@ -54,6 +54,73 @@ namespace NETCORE_CA_8A.Controllers
             return View();
         }
 
+
+
+        public ActionResult CheckoutCart()
+        {
+            Cart cart;
+            int userId = 1;
+            using (var dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
+                    if (cart == null)
+                    {
+                        throw new Exception("Cart not found");
+                    }
+
+
+                    cart.CartItems = db.CartItem.Where(x => x.CartId == cart.Id).ToList();
+
+
+                    if (cart.CartItems.Count == 0)
+                    {
+                        throw new Exception("Cart is empty");
+                    }
+
+
+                    foreach (CartItem cartItem in cart.CartItems)
+                    {
+                        Product product = db.Products.FirstOrDefault(x => x.Id == cartItem.ProductId);
+
+
+                        if (product == null)
+                        {
+                            throw new Exception("Product not exists");
+                        }
+
+
+
+
+
+                        for (int i = 0; i < cartItem.Quantity; i++)
+                        {
+                            string activationCode = GetActivationCode();
+                            Purchased purchased = new Purchased(cartItem.Id, activationCode);
+                            db.Purchased.Add(purchased);
+                            db.SaveChanges();
+                        }
+                    }
+
+                    cart.IsCheckOut = 1;
+                    cart.CheckoutTime = DateTime.Now;
+
+                    db.SaveChanges();
+                    dbTransaction.Commit();
+
+                }
+                catch (Exception e)
+                {
+                    dbTransaction.Rollback();
+                    throw new Exception(e.Message);
+                }
+            }
+            ViewBag.cartItems = GetCartItems(cart.Id);
+
+            return View();
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public int AddItemToCart(string productId, int quantity)
@@ -80,7 +147,7 @@ namespace NETCORE_CA_8A.Controllers
 
                     if (product == null)
                     {
-                        throw new Exception("Product not exists");
+                        throw new Exception("Product does not exist");
                     }
 
                     CartItem cartItem = db.CartItem.FirstOrDefault(x => x.CartId == cart.Id && x.ProductId == productId);
@@ -155,7 +222,7 @@ namespace NETCORE_CA_8A.Controllers
                             ProductId = product.Id,
                             Quantity = item.Quantity,
                             Product = product,
-                            CheckoutTime = db.Cart.Where(cart => cart.Id == cartId).Select(cart => cart.CheckoutTime).FirstOrDefault(),
+                            CheckoutTime = DateTime.Now,
                             ActivationCodes = db.Purchased.Where(p => p.CartItemId == item.Id).Select(p => p.ActivationCode).ToList()
                         }).ToList();
 
@@ -169,6 +236,22 @@ namespace NETCORE_CA_8A.Controllers
                 CheckoutTime = x.CheckoutTime,
                 ActivationCodes = x.ActivationCodes
             }).ToList();
+
+
         }
+
+        private static string GetActivationCode()
+        {
+            
+            return Guid.NewGuid().ToString();
+            
+        }
+
+        public void AddtoRecord (int CartId)
+        {
+            List<CartItem> cartItem = GetCartItems(CartId);
+
+        }     
+
     }
 }

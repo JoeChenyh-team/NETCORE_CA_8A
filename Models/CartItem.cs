@@ -16,6 +16,8 @@ namespace NETCORE_CA_8A.Models
 
         public virtual Product Product { get; set; }
 
+        
+
         [NotMapped]
         public virtual DateTime CheckoutTime { get; set; }
 

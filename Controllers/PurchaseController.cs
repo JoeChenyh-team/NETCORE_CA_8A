@@ -42,8 +42,12 @@ purchase1.CustomerId = cust1.Id;
             ViewData["CustomerId"] = 2;
             ViewBag.Purchases = GetAllPurchases(2);
             
+
+
             return View();
         }
+
+
         
         public List<Purchase> GetAllPurchases(int customerid)
         {
