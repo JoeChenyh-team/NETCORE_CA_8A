@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
@@ -14,18 +15,51 @@ namespace NETCORE_CA_8A.Controllers
     {
         protected StoreDbContext db;
         private readonly ILogger<CartController> _logger;
+        int? userId;
 
         public CartController(StoreDbContext dbcontext, ILogger<CartController> logger)
         {
             db = dbcontext;
             _logger = logger;
         }
-        public ActionResult AddtoCart(string productId)
+
+       // [Route("/AddCart/{productId}/{fromProdDetail}")]
+        public ActionResult AddtoCart(string productId,string fromProdDetail="")
         {
+            userId = (int)HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index"});
+            }
+            ViewBag.UserId = userId;
+            //ViewBag.Username = (string)HttpContext.Session.GetString("Username");
             ViewBag.ItemCount = AddItemToCart(productId, 1);
-            return PartialView("_cartLogo");
+            string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname;
+            //return PartialView("_cartLogo");
+            HttpContext.Session.SetInt32("cartItemCount",(int) ViewBag.ItemCount);
+            if(fromProdDetail == "true")
+            {
+                return RedirectToRoute(new { controller = "Product", action = "View2", itemCount = ViewBag.ItemCount });
+            }
+            return RedirectToRoute(new { controller = "Gallery", action = "Gallery", itemCount = ViewBag.ItemCount });
         }
 
+        public ActionResult AddItemFromCart(string productId)
+        {
+            ViewBag.ItemCount = AddItemToCart(productId, 1);
+            HttpContext.Session.SetInt32("cartItemCount", (int)ViewBag.ItemCount);
+            return RedirectToRoute(new { controller = "Cart", action = "Cart", itemCount = ViewBag.ItemCount });
+        }
+        public ActionResult RemoveItemFromCart(string productId)
+        {
+            ViewBag.ItemCount = AddItemToCart(productId, -1);
+            HttpContext.Session.SetInt32("cartItemCount", (int)ViewBag.ItemCount);
+            return RedirectToRoute(new { controller = "Cart", action = "Cart", itemCount = ViewBag.ItemCount });
+        }
+        
+        [Route("/Cart")]
         public ActionResult Cart()
         {
             ViewBag.ItemCount = GetItemCount();
@@ -69,10 +103,6 @@ namespace NETCORE_CA_8A.Controllers
                             throw new Exception("Product not exists");
                         }
 
-
-
-
-
                         for (int i = 0; i < cartItem.Quantity; i++)
                         {
                             string activationCode = GetActivationCode();
@@ -101,7 +131,7 @@ namespace NETCORE_CA_8A.Controllers
                 }
             }
             ViewBag.cartItems = GetCartItems(cart.Id);
-
+            ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
             return View();
         }
 
@@ -110,7 +140,8 @@ namespace NETCORE_CA_8A.Controllers
         public int AddItemToCart(string productId, int quantity)
         {
             // int userId = HttpContext.Session.GetInt32("UserId");
-            int userId = 1;
+            //int userId = 1;
+            int userId = (int)HttpContext.Session.GetInt32("UserId");
             using (IDbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
                 Cart cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
@@ -139,7 +170,7 @@ namespace NETCORE_CA_8A.Controllers
                     {
                         cartItem = new CartItem(cart.Id, productId);
                         db.CartItem.Add(cartItem);
-                       db.SaveChanges();
+                        db.SaveChanges();
                     }
                     else
                     {
@@ -171,7 +202,8 @@ namespace NETCORE_CA_8A.Controllers
         public List<CartItem> GetAllCartItems()
         {
             // int userId = HttpContext.Session.GetInt32("UserId");
-            int userId = 1;
+            //int userId = 1;
+            int userId = (int)HttpContext.Session.GetInt32("UserId");
             var query = db.Cart.Where(cart => cart.CustomerId == userId && cart.IsCheckOut == 0).Select(cart => cart.Id).FirstOrDefault();
             return GetCartItems(query);
         }
@@ -179,7 +211,8 @@ namespace NETCORE_CA_8A.Controllers
         public int GetItemCount()
         {
             //int userId = (int)HttpContext.Session["UserId"];
-            int userId = 1;
+            // int userId = 1;
+            int userId = (int)HttpContext.Session.GetInt32("UserId");
             Cart cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
 
             if (cart == null)

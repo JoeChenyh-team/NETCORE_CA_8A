@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,22 +18,37 @@ namespace NETCORE_CA_8A.Controllers
     {
         protected StoreDbContext _dbcontext;
         private readonly ILogger<HomeController> _logger;
+      
 
         public GalleryController(StoreDbContext dbcontext, ILogger<HomeController> logger)
         {
             _dbcontext = dbcontext;
             _logger = logger;
         }
-        public IActionResult Gallery(string username,string keyword="")
+
+       // [Route("/galleryRoute")]
+        public IActionResult Gallery(int itemCount=0,string keyword="")
         {
-            ViewData["username"] = username;
+            ViewBag.ItemCount = itemCount;
+            int? uid = HttpContext.Session.GetInt32("UserId");
+            ViewBag.UserId = uid;
+            //ViewBag.Username = (string)HttpContext.Session.GetString("Username");
+            //ViewData["username"] = username;
+            string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname;
+
             ViewBag.products = GetAllProducts(keyword);
             if(ViewBag.products.Count==0)
             {
                 ViewBag.search = "not found";
+              
             }
+           /* ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
+            ViewBag.Username = (string)HttpContext.Session.GetString("Username");*/
             return View();
         }
+
+
 
         public List<Product> GetAllProducts(string keyword)
         {
@@ -45,8 +61,6 @@ namespace NETCORE_CA_8A.Controllers
             {
                 return _dbcontext.Products.ToList();
             }
-
-           
 
             return _dbcontext.Products.Where(p =>
                     p.productName.ToLower().Contains(keyword.ToLower()) ||

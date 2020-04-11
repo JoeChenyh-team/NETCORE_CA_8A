@@ -31,26 +31,49 @@ namespace NETCORE_CA_8A.Controllers
         public IActionResult Login(string username, string password)
         {
             string hashPassword = Utils.Crypto.Sha256(password);
-            
-            HttpContext.Session.SetString("username", username);
-            HttpContext.Session.SetInt32("UserId", 1);
+           
+           // ViewBag.Username = HttpContext.Session.GetString("Username");
 
             if (CheckAuthentication(username, hashPassword))
-                //return RedirectToAction("Gallery","Home");
+            {
+                int uid = (int)HttpContext.Session.GetInt32("UserId");
+                ViewBag.UserId = uid;
+                
+                string uname= HttpContext.Session.GetString("Username");
+                ViewBag.Username = uname;
+                //return RedirectToAction("Gallery", "Gallery");
                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
-
+            }
+                //return RedirectToAction("Gallery","Home");
+                //return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
+               
             else
-                return View("Index", "Home");
+            {
+                TempData["loginErrorMessage"] = "Invalid Username and password!";
+                return RedirectToAction("Index", "Home");
+            }
+               
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("Username");
+            HttpContext.Session.Remove("UserId");
+            HttpContext.Session.Remove("cartItemCount");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         public bool CheckAuthentication(string name, string password)
         {
-            var pwd = _dbcontext.Customers.Where(x => x.Name == name)
-                    .Select(x => x.Password).FirstOrDefault();
-            if (pwd == null || password != pwd)
+            var cust = _dbcontext.Customers.Where(x => x.Name == name)
+                     .FirstOrDefault();
+            if (cust == null || cust.Password != password)
             {
                 return false;
             }
+            HttpContext.Session.SetString("Username", cust.Name);
+            HttpContext.Session.SetInt32("UserId", cust.Id);
             return true;
 
         }
