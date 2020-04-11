@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "GetPurchasedHistory";
+    Layout = "_galleryLayout";
+}
+
+<h1>My Purchases</h1>
+
+@if (@ViewBag.CartItems == null)
+{
+    <div class="alert alert-danger">
+        <strong>No product added to cart!</strong>
+    </div>
+
+}
+
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Price Total</th>
+                <th>Activation Code</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int Total = 0;
+            }
+            @foreach (var item in @ViewBag.CartItems)
+            {
+                int lineTotal = Convert.ToInt32(item.Quantity * item.Product.unitPrice);
+                Total = Convert.ToInt32(@Total + lineTotal);
+                <tr>
+                    <td>@item.Product.productName</td>
+                    <td>@item.Product.unitPrice</td>
+                    <td>@item.Quantity</td>
+                    <td>@lineTotal</td>
+                    <td>
+                        <select>
+                            @{
+                                foreach (var activationCode in item.ActivationCodes)
+                                {
+                                    <option>@activationCode</option>
+                                }
+                            }
+                        </select>
+                    </td>
+
+                </tr>
+            }
+
+
+
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
+
+
+        </tbody>
+        <td colspan="5"></td>
+        <td>
+            <form action="/Gallery/Gallery">
+                <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
+                <input class="button-primary" type="submit" value="Continue Shopping">
+            </form>
+        </td>
+    </table>
+}

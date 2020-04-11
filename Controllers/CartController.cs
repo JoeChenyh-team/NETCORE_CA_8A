@@ -208,6 +208,13 @@ namespace NETCORE_CA_8A.Controllers
             return GetCartItems(query);
         }
 
+        public ActionResult GetPurchasedHistory()
+        {
+            ViewBag.ItemCount = GetItemCount();
+            ViewBag.cartItems = GetPurchasedItems();
+            return View();
+        }
+
         public int GetItemCount()
         {
             //int userId = (int)HttpContext.Session["UserId"];
@@ -225,6 +232,7 @@ namespace NETCORE_CA_8A.Controllers
 
             return cart.Quantity;
         }
+        
         public List<CartItem> GetCartItems(int cartId)
         {
             var query = db.CartItem.Where(cartItem => cartItem.CartId == cartId)
@@ -261,11 +269,18 @@ namespace NETCORE_CA_8A.Controllers
             
         }
 
-        public void AddtoRecord (int CartId)
+        public List<CartItem> GetPurchasedItems()
         {
-            List<CartItem> cartItem = GetCartItems(CartId);
+            List<Cart> purchaseCarts = db.Cart.Where(cart => cart.IsCheckOut == 1).OrderBy(cart => cart.CheckoutTime).ToList();
+            
+            List<CartItem> cartItems = new List<CartItem>();
+            foreach (Cart cart in purchaseCarts)
+            {
+                cartItems.AddRange(GetCartItems(cart.Id));
+            }
 
-        }     
+            return cartItems;
+        }
 
     }
 }
