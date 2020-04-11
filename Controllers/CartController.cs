@@ -33,6 +33,15 @@ namespace NETCORE_CA_8A.Controllers
             return View();
         }
 
+        public ActionResult CheckoutCart()
+        {
+            
+            ViewBag.CartItems = GetAllCartItems();
+            
+            
+            return View();
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public int AddItemToCart(string productId, int quantity)
@@ -58,7 +67,7 @@ namespace NETCORE_CA_8A.Controllers
 
                     if (product == null)
                     {
-                        throw new Exception("Product not exists");
+                        throw new Exception("Product does not exist");
                     }
 
                     CartItem cartItem = db.CartItem.FirstOrDefault(x => x.CartId == cart.Id && x.ProductId == productId);
@@ -145,6 +154,22 @@ namespace NETCORE_CA_8A.Controllers
                 CheckoutTime = x.CheckoutTime,
                 ActivationCodes = x.ActivationCodes
             }).ToList();
+
+
         }
+
+        private static string GetActivationCode()
+        {
+            
+            return new Guid().ToString();
+        }
+
+        public static DateTime GetCheckoutTime ()
+        {
+            
+            return DateTime.UtcNow;
+        }
+
+
     }
 }
