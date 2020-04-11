@@ -35,8 +35,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index"><b>View Cart</b></a>
                         </li>
-                        <li class="nav-item" style="float: right !important;"><a href="/Cart/Cart"><img src="/lib/images/bag.png" height="25" width="20" /></a><span style="color: goldenrod;font-size: 12px;">@ViewBag.ItemCount</span></li>
-                        
+                        <li class="nav-item" style="float: right !important;">
+                            <a href="/Cart"><img src="/lib/images/bag.png" height="25" width="20" /></a>
+                            <span style="color: goldenrod;font-size: 12px;">@ViewBag.ItemCount</span>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout"><b> Logout </b></a>
                         </li>

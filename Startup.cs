@@ -45,6 +45,7 @@ namespace NETCORE_CA_8A
                .UseSqlServer(Configuration.GetConnectionString("DbConn")));
 
             services.AddSession();
+            services.AddHttpContextAccessor();
 
         }
 
@@ -77,7 +78,10 @@ namespace NETCORE_CA_8A
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                    name: "add",
-                   pattern: "{controller=Home}/{action=Gallery}/{username?}");
+                   pattern: "{controller=Gallery}/{action=Gallery}/{username?}");
+                endpoints.MapControllerRoute(
+                   name: "add",
+                   pattern: "{controller=Cart}/{action=AddtoCart}/{productId?}/{fromProdDetail?}");
                 endpoints.MapControllerRoute(
                   name: "add1",
                   pattern: "{controller=Product}/{action=View}/{product?}");

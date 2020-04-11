@@ -31,19 +31,37 @@ namespace NETCORE_CA_8A.Controllers
         public IActionResult Login(string username, string password)
         {
             string hashPassword = Utils.Crypto.Sha256(password);
-            ViewBag.UserId = HttpContext.Session.GetInt32("UserId");
-            ViewBag.Username = HttpContext.Session.GetString("Username");
+           
+           // ViewBag.Username = HttpContext.Session.GetString("Username");
 
             if (CheckAuthentication(username, hashPassword))
-                //return RedirectToAction("Gallery","Home");
+            {
+                int uid = (int)HttpContext.Session.GetInt32("UserId");
+                ViewBag.UserId = uid;
+                
+                string uname= HttpContext.Session.GetString("Username");
+                ViewBag.Username = uname;
+                //return RedirectToAction("Gallery", "Gallery");
                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
-
+            }
+                //return RedirectToAction("Gallery","Home");
+                //return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
+               
             else
             {
                 TempData["loginErrorMessage"] = "Invalid Username and password!";
                 return RedirectToAction("Index", "Home");
             }
                
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("Username");
+            HttpContext.Session.Remove("UserId");
+            HttpContext.Session.Remove("cartItemCount");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         public bool CheckAuthentication(string name, string password)
