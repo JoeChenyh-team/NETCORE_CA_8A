@@ -2,76 +2,87 @@
     ViewBag.Title = "Cart";
     Layout = "_galleryLayout";
 }
-
-<h2>Cart</h2>
-
 @using NETCORE_CA_8A.Models;
-<div class="container">
-    <div class="row col-md-6 col-md-offset-2 custyle">
-        <table class="table table-striped custab">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Desc</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            @{
-                double cost = 0;
-                foreach (CartItem cartItem in @ViewBag.CartItems)
-                {
-                    var subSum = @cartItem.Quantity * @cartItem.Product.unitPrice;
+<h2>Cart</h2>
+@{
+    if (@ViewBag.CartItems.Count == 0)
+    {
+        <div class="alert alert-info">
+            <strong>Your cart is empty!</strong>
+        </div>
+
+    }
+    else
+    {
+        <div class="container">
+            <div class="row col-md-6 col-md-offset-2 custyle">
+                <table class="table table-striped custab">
+                    <thead>
                         <tr>
-                            <td><img src=@cartItem.Product.Image class="card-img-top" style="height:100px;width:120px;"></td>
-                            <td>@cartItem.Product.productName</td>
-                            <td>@cartItem.Product.description</td>
-                            <td>
-                                <form action="/Cart/RemoveItemFromCart">
-                                    <input name="productId" type="hidden" value="@cartItem.Product.Id" />
-                                    <input class="icon-minus-sign" type="submit" value="-">
-                                </form>
-                            </td>
-
-                            <td>@cartItem.Quantity</td>
-
-                            <td>
-                                <form action="/Cart/AddItemFromCart">
-                                    <input name="productId" type="hidden" value="@cartItem.Product.Id" />
-                                    <input class="icon-plus-sign" type="submit" value="+">
-                                </form>
-                            </td>
-
-                            <td>@subSum</td>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Desc</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                    cost += @cartItem.Quantity * @cartItem.Product.unitPrice; 
-                }
-                <td>
-                    <form action="/Gallery/Gallery">
-                        <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
-                        <input class="button-primary" type="submit" value="Continue Shopping Cart VIew">
-                    </form>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><strong>@("Total $" + @cost)</strong></td>
-                <td>
-                    @if (cost != 0)
-                    {
-                        var str = "/Cart/CheckoutCart";
-                        <form action=@str>
-                            <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
-                            <input class="btn btn-primary" type="submit" value="Checkout">
-                        </form>
+                    </thead>
+                    @{
+
+                        double cost = 0;
+                        foreach (CartItem cartItem in @ViewBag.CartItems)
+                        {
+                            var subSum = @cartItem.Quantity * @cartItem.Product.unitPrice;
+                            <tr>
+                                <td><img src=@cartItem.Product.Image class="card-img-top" style="height:100px;width:120px;"></td>
+                                <td>@cartItem.Product.productName</td>
+                                <td>@cartItem.Product.description</td>
+                                <td>
+                                    <form action="/Cart/RemoveItemFromCart">
+                                        <input name="productId" type="hidden" value="@cartItem.Product.Id" />
+                                        <input class="icon-minus-sign" type="submit" value="-">
+                                    </form>
+                                </td>
+
+                                <td>@cartItem.Quantity</td>
+
+                                <td>
+                                    <form action="/Cart/AddItemFromCart">
+                                        <input name="productId" type="hidden" value="@cartItem.Product.Id" />
+                                        <input class="icon-plus-sign" type="submit" value="+">
+                                    </form>
+                                </td>
+
+                                <td>@subSum</td>
+                            </tr>
+                            cost += @cartItem.Quantity * @cartItem.Product.unitPrice;
+                        }
+                        <td>
+                            <form action="/Gallery/Gallery">
+                                <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
+                                <input class="button-primary" type="submit" value="Continue Shopping Cart VIew">
+                            </form>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><strong>@("Total $" + @cost)</strong></td>
+                        <td>
+                            @if (cost != 0)
+                            {
+                                var str = "/Cart/CheckoutCart";
+                                <form action=@str>
+                                    <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
+                                    <input class="btn btn-primary" type="submit" value="Checkout">
+                                </form>
+                            }
+                        </td>
                     }
-                </td>
-            }
-        </table>
-    </div>
-</div>
+                </table>
+            </div>
+        </div>
+    }
+}

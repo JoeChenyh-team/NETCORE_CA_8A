@@ -118,7 +118,8 @@ namespace NETCORE_CA_8A.DB
              product7.description = "Powerful Access methods to store data.";
              product7.unitPrice = 600.00;
              product7.CategoryId = cat2.Id;
-             dbcontext.Add(product7);
+             product7.Image = "https://localhost:44331/lib/images/MA.JPG";
+            dbcontext.Add(product7);
 
              Product product8 = new Product();
              product8.Id = Guid.NewGuid().ToString();
@@ -126,7 +127,8 @@ namespace NETCORE_CA_8A.DB
              product8.description = "Powerful application to access your emails.";
              product8.unitPrice = 999.00;
              product8.CategoryId = cat2.Id;
-             dbcontext.Add(product8);
+             product8.Image = "https://localhost:44331/lib/images/Outlook.JPG";
+            dbcontext.Add(product8);
 
              Product product9 = new Product();
              product9.Id = Guid.NewGuid().ToString();
@@ -134,7 +136,8 @@ namespace NETCORE_CA_8A.DB
              product9.description = "Powerful tool for you to program more programs";
              product9.unitPrice = 900.00;
              product9.CategoryId = cat2.Id;
-             dbcontext.Add(product9);
+             product9.Image = "https://localhost:44331/lib/images/vs.png";
+            dbcontext.Add(product9);
 
               Purchase purchase1 = new Purchase();
               purchase1.Id = Guid.NewGuid().ToString();

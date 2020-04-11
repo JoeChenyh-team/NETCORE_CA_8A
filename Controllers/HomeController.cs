@@ -26,6 +26,7 @@ namespace NETCORE_CA_8A.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
             return View();
         }
         public IActionResult Login(string username, string password)

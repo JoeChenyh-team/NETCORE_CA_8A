@@ -5,13 +5,14 @@
 
 <h1>My Purchases</h1>
 
-@if (@ViewBag.CartItems == null)
+@if (@ViewBag.CartItems.Count == 0)
 {
-    <div class="alert alert-danger">
-        <strong>No product added to cart!</strong>
+    <div class="alert alert-info">
+        <strong>You have no previous purchased history!</strong>
     </div>
 
 }
+
 
 else
 {
