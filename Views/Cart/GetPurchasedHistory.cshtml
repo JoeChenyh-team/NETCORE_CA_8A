@@ -3,7 +3,7 @@
     Layout = "_galleryLayout";
 }
 
-<h1>My Purchases</h1>
+<b style="margin-right: 10px;color:#568ea1;font-size: 20px;font-style: bold;margin-left:460px;margin-bottom:15px;">My Purchases</b>
 
 @if (@ViewBag.CartItems.Count == 0)
 {
@@ -23,9 +23,7 @@ else
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Price Total</th>
-                <th>Activation Code</th>
-
-
+                <th colspan="2">Activation Code</th>
             </tr>
         </thead>
         <tbody>
@@ -51,26 +49,21 @@ else
                             }
                         </select>
                     </td>
+                    <td>
+                        <a href="" class="btn btn-primary">Download</a>
+                    </td>
 
                 </tr>
+                <tr style="text-align:left">
+                    <td colspan="6">
+                        <form action="/Gallery/Gallery">
+                            <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
+                            <input class="btn btn-outline-primary" type="submit" value="Continue Shopping">
+                        </form>
+                    </td>
+                    
+                </tr>
             }
-
-
-
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-
-
         </tbody>
-        <td colspan="5"></td>
-        <td>
-            <form action="/Gallery/Gallery">
-                <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
-                <input class="button-primary" type="submit" value="Continue Shopping">
-            </form>
-        </td>
     </table>
 }

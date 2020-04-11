@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -46,6 +47,9 @@ namespace NETCORE_CA_8A.Controllers
             ViewBag.Product = GetAllProducts(newid);
             ViewBag.Recommendation = GetAllRecommend(newid);
             ViewBag.Review = GetAllReview(newid);
+
+            string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname;
 
             if (ViewBag.Product.Count == 0)
             {

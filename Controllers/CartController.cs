@@ -49,6 +49,8 @@ namespace NETCORE_CA_8A.Controllers
         public ActionResult AddItemFromCart(string productId)
         {
             ViewBag.ItemCount = AddItemToCart(productId, 1);
+            string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname;
             HttpContext.Session.SetInt32("cartItemCount", (int)ViewBag.ItemCount);
             return RedirectToRoute(new { controller = "Cart", action = "Cart", itemCount = ViewBag.ItemCount });
         }
@@ -64,6 +66,8 @@ namespace NETCORE_CA_8A.Controllers
         {
             ViewBag.ItemCount = GetItemCount();
             ViewBag.CartItems = GetAllCartItems();
+            string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname;
             return View();
         }
 
@@ -132,6 +136,8 @@ namespace NETCORE_CA_8A.Controllers
             }
             ViewBag.cartItems = GetCartItems(cart.Id);
             ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+            string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname;
             return View();
         }
 
@@ -212,6 +218,8 @@ namespace NETCORE_CA_8A.Controllers
         {
             ViewBag.ItemCount = GetItemCount();
             ViewBag.cartItems = GetPurchasedItems();
+            string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname;
             return View();
         }
 
@@ -271,7 +279,8 @@ namespace NETCORE_CA_8A.Controllers
 
         public List<CartItem> GetPurchasedItems()
         {
-            List<Cart> purchaseCarts = db.Cart.Where(cart => cart.IsCheckOut == 1).OrderBy(cart => cart.CheckoutTime).ToList();
+            int userId = (int)HttpContext.Session.GetInt32("UserId");
+            List<Cart> purchaseCarts = db.Cart.Where(cart => cart.CustomerId == userId && cart.IsCheckOut == 1).OrderBy(cart => cart.CheckoutTime).ToList();
             
             List<CartItem> cartItems = new List<CartItem>();
             foreach (Cart cart in purchaseCarts)
