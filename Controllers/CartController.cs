@@ -80,7 +80,12 @@ namespace NETCORE_CA_8A.Controllers
                             db.Purchased.Add(purchased);
                             db.SaveChanges();
                         }
+
+                      
+
                     }
+
+
 
                     cart.IsCheckOut = 1;
                     cart.CheckoutTime = DateTime.Now;
@@ -117,7 +122,7 @@ namespace NETCORE_CA_8A.Controllers
                         db.Cart.Add(cart);
                         db.SaveChanges();
                     }
-
+                        
                     // Product product = db.Products.FirstOrDefault(x => x.Id == productId);
                     Product product = db.Products
                              .Where(x => x.Id == productId)
