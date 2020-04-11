@@ -37,31 +37,42 @@
         {
             int lineTotal = Convert.ToInt32(item.Quantity * item.Product.unitPrice);
             Total = Convert.ToInt32(@Total + lineTotal);
-        <tr>
-            <td>@item.Product.productName</td>
-            <td>@item.Product.unitPrice</td>
-            <td>@item.Quantity</td>
-            <td>@lineTotal</td>
-            <td>@item.CheckoutTime</td>
-            <td>
-                <select>
-                    @{
-                        foreach (var activationCode in item.ActivationCodes)
-                        {
-                            <option>@activationCode</option>
-                        }
-                    }
-                </select>
-            </td>
-            <td><button>Download</button></td>
-
-        </tr>
-        }
-        
-
             <tr>
-                <td colspan="4" class="text-right"><b>Total: @Total</b></td>
+                <td>@item.Product.productName</td>
+                <td>@item.Product.unitPrice</td>
+                <td>@item.Quantity</td>
+                <td>@lineTotal</td>
+                <td>@item.CheckoutTime</td>
+                <td>
+                    <select>
+                        @{
+                            foreach (var activationCode in item.ActivationCodes)
+                            {
+                                <option>@activationCode</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td><button>Download</button></td>
+
             </tr>
+        }
+
+
+        <tr>
+            <td colspan="4" class="text-right"><b>Total: @Total</b></td>
+        </tr>
+
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+
+
     </tbody>
-    </table>
+    <td colspan="6"></td>
+    
+    <td colspan="4" class="text-right"><a href="/Gallery"><button class="btn btn-primary">Return to Gallery</button></a></td>
+</table>
     }
