@@ -24,19 +24,37 @@
                 double cost = 0;
                 foreach (CartItem cartItem in @ViewBag.CartItems)
                 {
+                    var subSum = @cartItem.Quantity * @cartItem.Product.unitPrice;
                         <tr>
-                            <td><img src=@("http://fakeimg.pl/150x150/?text="+@cartItem.Product.productName) class="img-responsive"></td>
+                            <td><img src=@cartItem.Product.Image class="card-img-top" style="height:100px;width:120px;"></td>
                             <td>@cartItem.Product.productName</td>
                             <td>@cartItem.Product.description</td>
-                            <td>@cartItem.Quantity</td>
-                            <td>@cartItem.Product.unitPrice</td>
-                            <td><a href=@("" + @cartItem.Product.Id)><span class="glyphicon glyphicon-plus"></span></a></td>
+                            <td>
+                                <form action="/Cart/RemoveItemFromCart">
+                                    <input name="productId" type="hidden" value="@cartItem.Product.Id" />
+                                    <input class="icon-minus-sign" type="submit" value="-">
+                                </form>
+                            </td>
 
-                            <td><a href=@("" + @cartItem.Product.Id)><span class="glyphicon glyphicon-minus"></span></a></td>
+                            <td>@cartItem.Quantity</td>
+
+                            <td>
+                                <form action="/Cart/AddItemFromCart">
+                                    <input name="productId" type="hidden" value="@cartItem.Product.Id" />
+                                    <input class="icon-plus-sign" type="submit" value="+">
+                                </form>
+                            </td>
+
+                            <td>@subSum</td>
                         </tr>
                     cost += @cartItem.Quantity * @cartItem.Product.unitPrice; 
                 }
-                <td><a href="/Gallery/Gallery"><button class="btn btn-default">Continue Shopping</button></a></td>
+                <td>
+                    <form action="/Gallery/Gallery">
+                        <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
+                        <input class="button-primary" type="submit" value="Continue Shopping Cart VIew">
+                    </form>
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -46,7 +64,11 @@
                 <td>
                     @if (cost != 0)
                     {
-                        <a href="/Cart/CheckoutCart"><button class="btn btn-primary">Checkout</button></a>
+                        var str = "/Cart/CheckoutCart";
+                        <form action=@str>
+                            <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
+                            <input class="btn btn-primary" type="submit" value="Checkout">
+                        </form>
                     }
                 </td>
             }

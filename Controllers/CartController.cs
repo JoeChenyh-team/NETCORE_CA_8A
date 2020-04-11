@@ -46,6 +46,19 @@ namespace NETCORE_CA_8A.Controllers
             return RedirectToRoute(new { controller = "Gallery", action = "Gallery", itemCount = ViewBag.ItemCount });
         }
 
+        public ActionResult AddItemFromCart(string productId)
+        {
+            ViewBag.ItemCount = AddItemToCart(productId, 1);
+            HttpContext.Session.SetInt32("cartItemCount", (int)ViewBag.ItemCount);
+            return RedirectToRoute(new { controller = "Cart", action = "Cart", itemCount = ViewBag.ItemCount });
+        }
+        public ActionResult RemoveItemFromCart(string productId)
+        {
+            ViewBag.ItemCount = AddItemToCart(productId, -1);
+            HttpContext.Session.SetInt32("cartItemCount", (int)ViewBag.ItemCount);
+            return RedirectToRoute(new { controller = "Cart", action = "Cart", itemCount = ViewBag.ItemCount });
+        }
+        
         [Route("/Cart")]
         public ActionResult Cart()
         {
@@ -90,10 +103,6 @@ namespace NETCORE_CA_8A.Controllers
                             throw new Exception("Product not exists");
                         }
 
-
-
-
-
                         for (int i = 0; i < cartItem.Quantity; i++)
                         {
                             string activationCode = GetActivationCode();
@@ -117,7 +126,7 @@ namespace NETCORE_CA_8A.Controllers
                 }
             }
             ViewBag.cartItems = GetCartItems(cart.Id);
-
+            ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
             return View();
         }
 

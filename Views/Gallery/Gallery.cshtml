@@ -53,7 +53,7 @@
     <section style="display:block;overflow:hidden;margin:2em;">
         @foreach (Product product in @ViewBag.products)
         {
-            var str = "/Cart/AddtoCart";
+            var str = "/Cart/AddtoCart"; 
             <form action=@str>
                 <div class="card" style="height:25em;width: 18rem;float:left;margin: 0.5em;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);text-align: center;font-family: arial;	">
                     <img class="card-img-top" src="@product.Image" alt="Card image cap">
@@ -73,6 +73,5 @@
     </section>
 }
 }
-
 
 

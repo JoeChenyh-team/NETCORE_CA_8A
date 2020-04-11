@@ -72,7 +72,22 @@
 
     </tbody>
     <td colspan="6"></td>
-    
-    <td colspan="4" class="text-right"><a href="/Gallery"><button class="btn btn-primary">Return to Gallery</button></a></td>
+    <!--
+        <td colspan="4" class="text-right">
+        <a href="/Gallery">
+            <button class="btn btn-primary">Return to Gallery</button>
+        </a>
+
+    </td>
+
+        -->
+
+
+    <td>
+        <form action= "/Gallery/Gallery">
+            <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
+            <input class="button-primary" type="submit" value="Continue Shopping Cart VIew">
+        </form>
+    </td>
 </table>
     }
