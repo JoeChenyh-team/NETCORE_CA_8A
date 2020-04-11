@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             @{
-                decimal cost = 0;
+                double cost = 0;
                 foreach (CartItem cartItem in @ViewBag.CartItems)
                 {
                         <tr>
@@ -34,7 +34,7 @@
 
                             <td><a href=@("" + @cartItem.Product.Id)><span class="glyphicon glyphicon-minus"></span></a></td>
                         </tr>
-                  /*  cost += @cartItem.Quantity * @cartItem.Product.unitPrice; temporarily hide */
+                    cost += @cartItem.Quantity * @cartItem.Product.unitPrice; 
                 }
                 <td><a href="/Gallery/Gallery"><button class="btn btn-default">Continue Shopping</button></a></td>
                 <td></td>

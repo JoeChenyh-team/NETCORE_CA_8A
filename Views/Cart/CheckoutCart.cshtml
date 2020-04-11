@@ -37,15 +37,25 @@
         {
             int lineTotal = Convert.ToInt32(item.Quantity * item.Product.unitPrice);
             Total = Convert.ToInt32(@Total + lineTotal);
-            <tr>
-                <td>@item.Product.productName</td>
-                <td>@item.Product.unitPrice</td>
-                <td>@item.Quantity</td>
-                <td>@lineTotal</td>
-                <td>@item.CheckoutTime</td>
-                <td>@item.ActivationCodes</td>
+        <tr>
+            <td>@item.Product.productName</td>
+            <td>@item.Product.unitPrice</td>
+            <td>@item.Quantity</td>
+            <td>@lineTotal</td>
+            <td>@item.CheckoutTime</td>
+            <td>
+                <select>
+                    @{
+                        foreach (var activationCode in item.ActivationCodes)
+                        {
+                            <option>@activationCode</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td><button>Download</button></td>
 
-            </tr>
+        </tr>
         }
         
 
