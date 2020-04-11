@@ -41,7 +41,7 @@
 
     else
     {
-        <p>Search term: </p>
+        
 
         {@: @ViewBag.keyword
 
@@ -52,11 +52,20 @@
             var str = "/Cart/AddtoCart";
 <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
     <form action=@str class="form-inline">
-        <div><h4 class="title">@product.productName</h4></div>
+        <div><h3 class="title">@product.productName</h3></div>
+
+        @Html.ActionLink("Click to find out more", "View2", "Product", new { newid = @product.Id })
+
         <div><p class="desc">@product.description</p></div>
-        <div>Price: $@product.unitPrice</div>
+
+        <div></div>
+        <img src="@product.Image" width="120" height="120"><p></p>
+        <div>Price: $@product.unitPrice</div><p></p>
         <input name="productId" type="hidden" value="@product.Id" />
         <input class="button-primary" type="submit" value="Add To Cart">
+        <div></div><td></td>
+        <td></td>
+        <td></td>
         <p>
         <p>
         </p>
@@ -68,6 +77,6 @@
         }
     }
 }
-}
+
 
 

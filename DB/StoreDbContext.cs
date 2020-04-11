@@ -32,6 +32,10 @@ namespace NETCORE_CA_8A.DB
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<Purchased> Purchased { get; set; }
 
+        public DbSet<Recommendation> Recommendation { get; set; }
+
+        public DbSet<Review> Review { get; set; }
+
     }
 }
 
