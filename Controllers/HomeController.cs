@@ -42,6 +42,8 @@ namespace NETCORE_CA_8A.Controllers
                 
                 string uname= HttpContext.Session.GetString("Username");
                 ViewBag.Username = uname;
+
+                ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
                 //return RedirectToAction("Gallery", "Gallery");
                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
             }

@@ -27,14 +27,6 @@ namespace NETCORE_CA_8A.Controllers
        // [Route("/AddCart/{productId}/{fromProdDetail}")]
         public ActionResult AddtoCart(string productId,string fromProdDetail="")
         {
-            /*  userId = (int)HttpContext.Session.GetInt32("UserId");
-
-              if (userId == null)
-              {
-                  return RedirectToRoute(new { controller = "Home", action = "Index"});
-              }
-              */
-
             ViewBag.UserId = userId;
             //ViewBag.Username = (string)HttpContext.Session.GetString("Username");
             ViewBag.ItemCount = AddItemToCart(productId, 1);
@@ -111,9 +103,10 @@ namespace NETCORE_CA_8A.Controllers
             else
             {
                 userId = (int)HttpContext.Session.GetInt32("UserId");
-                cart = db.Cart.Where(x => x.SessionId == SessionId).First();
+                cart = db.Cart.Where(x => x.SessionId == SessionId && x.IsCheckOut == 0).First();
                 cart.CustomerId = userId;
                 db.Cart.Update(cart);
+
 
                 uname = HttpContext.Session.GetString("Username");
                 ViewBag.Username = uname;
@@ -121,6 +114,7 @@ namespace NETCORE_CA_8A.Controllers
                 ViewBag.ItemCount = GetItemCount();
 
                 db.SaveChanges();
+                
             }
 
             using (var dbTransaction = db.Database.BeginTransaction())
@@ -177,18 +171,13 @@ namespace NETCORE_CA_8A.Controllers
                 }
             }
             ViewBag.cartItems = GetCartItems(cart.Id);
-            ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+            ViewBag.ItemCount = 0;
             return View();
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public int AddItemToCart(string productId, int quantity)
         {
-            // int userId = HttpContext.Session.GetInt32("UserId");
-            //int userId = 1;
-           // int userId = (int)HttpContext.Session.GetInt32("UserId");
-
             string SessionId = HttpContext.Session.Id;
 
             ViewBag.SessionId = SessionId;
@@ -238,9 +227,13 @@ namespace NETCORE_CA_8A.Controllers
 
                     cart.Quantity += quantity;
                /*     cart.Value += quantity * product.unitPrice;  temporarily hide*/
-
+                
                     db.SaveChanges();
+                   
                     dbTransaction.Commit();
+                    HttpContext.Session.SetInt32("cartItemCount", cart.Quantity);
+                    ViewBag.ItemCount = cart.Quantity;
+
                     return cart.Quantity;
                 }
                 catch (Exception e)
@@ -248,15 +241,14 @@ namespace NETCORE_CA_8A.Controllers
                     dbTransaction.Rollback();
                     throw new Exception(e.Message);
                 }
+                
+                
             }
         }
 
 
         public List<CartItem> GetAllCartItems()
         {
-            // int userId = HttpContext.Session.GetInt32("UserId");
-            //int userId = 1;
-
             string SessionId = HttpContext.Session.Id;
 
             ViewBag.SessionId = SessionId;
@@ -267,6 +259,13 @@ namespace NETCORE_CA_8A.Controllers
 
         public ActionResult GetPurchasedHistory()
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+            }
+
             ViewBag.ItemCount = GetItemCount();
             ViewBag.cartItems = GetPurchasedItems();
             string uname = HttpContext.Session.GetString("Username");
@@ -276,11 +275,6 @@ namespace NETCORE_CA_8A.Controllers
 
         public int GetItemCount()
         {
-            //int userId = (int)HttpContext.Session["UserId"];
-            // int userId = 1;
-            //int userId = (int)HttpContext.Session.GetInt32("UserId");
-            //Cart cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
-
             string SessionId = HttpContext.Session.Id;
 
             ViewBag.SessionId = SessionId;
@@ -336,9 +330,6 @@ namespace NETCORE_CA_8A.Controllers
 
         public List<CartItem> GetPurchasedItems()
         {
-            //int userId = (int)HttpContext.Session.GetInt32("UserId");
-            //List<Cart> purchaseCarts = db.Cart.Where(cart => cart.CustomerId == userId && cart.IsCheckOut == 1).OrderBy(cart => cart.CheckoutTime).ToList();
-
             string SessionId = HttpContext.Session.Id;
 
             ViewBag.SessionId = SessionId;

@@ -74,11 +74,13 @@ namespace NETCORE_CA_8A
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                  name: "default",
+                  pattern: "{controller=Gallery}/{action=Gallery}/{username?}");
+
                 endpoints.MapControllerRoute(
-                   name: "add",
-                   pattern: "{controller=Gallery}/{action=Gallery}/{username?}");
+                    name: "add",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+               
                 endpoints.MapControllerRoute(
                    name: "add",
                    pattern: "{controller=Cart}/{action=AddtoCart}/{productId?}/{fromProdDetail?}");

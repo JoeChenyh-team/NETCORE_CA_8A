@@ -43,10 +43,12 @@ namespace NETCORE_CA_8A.Controllers
                 ViewBag.search = "not found";
               
             }
-           /* ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
-            ViewBag.Username = (string)HttpContext.Session.GetString("Username");*/
+            /* ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
+             ViewBag.Username = (string)HttpContext.Session.GetString("Username");*/
+            ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
             return View();
         }
+
 
 
 
