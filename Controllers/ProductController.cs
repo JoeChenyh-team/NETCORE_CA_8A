@@ -49,7 +49,9 @@ namespace NETCORE_CA_8A.Controllers
             ViewBag.Review = GetAllReview(newid);
 
 
+            ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
             string uname = HttpContext.Session.GetString("Username");
+            ViewBag.Username = uname; uname = HttpContext.Session.GetString("Username");
             ViewBag.Username = uname;
 
             if (ViewBag.Product.Count == 0)
@@ -132,7 +134,11 @@ namespace NETCORE_CA_8A.Controllers
                 _dbcontext.Review.Add(review);
                 _dbcontext.SaveChanges();
 
-                return RedirectToRoute(new { controller = "Gallery", action = "Gallery" });
+                ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+                string uname = HttpContext.Session.GetString("Username");
+                ViewBag.Username = uname;
+
+                return RedirectToRoute(new { controller = "Product", action = "View2", newid = newid });
 
 
             }
