@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NETCORE_CA_8A.Models;
+using NETCORE_CA_8A.Controllers;
 using NETCORE_CA_8A.DB;
 using Microsoft.AspNetCore.Http;
 
@@ -32,8 +33,6 @@ namespace NETCORE_CA_8A.Controllers
         public IActionResult Login(string username, string password)
         {
             string hashPassword = Utils.Crypto.Sha256(password);
-           
-           // ViewBag.Username = HttpContext.Session.GetString("Username");
 
             if (CheckAuthentication(username, hashPassword))
             {
@@ -43,13 +42,16 @@ namespace NETCORE_CA_8A.Controllers
                 string uname= HttpContext.Session.GetString("Username");
                 ViewBag.Username = uname;
 
-                ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+                
+                if (HttpContext.Session.GetInt32("cartItemCount") != null)
+                {
+                    ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+                }
+                
                 //return RedirectToAction("Gallery", "Gallery");
                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
             }
-                //return RedirectToAction("Gallery","Home");
-                //return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
-               
+                  
             else
             {
                 TempData["loginErrorMessage"] = "Invalid Username and password!";
@@ -62,8 +64,10 @@ namespace NETCORE_CA_8A.Controllers
         {
             HttpContext.Session.Remove("Username");
             HttpContext.Session.Remove("UserId");
-            HttpContext.Session.Remove("cartItemCount");
-            HttpContext.Session.Clear();
+            //HttpContext.Session.Remove("cartItemCount");
+            HttpContext.Session.Remove("SessionId");
+            
+           HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 
@@ -81,13 +85,5 @@ namespace NETCORE_CA_8A.Controllers
 
         }
 
-        
-        
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

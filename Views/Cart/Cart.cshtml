@@ -5,7 +5,9 @@
 @using NETCORE_CA_8A.Models;
 <b style="margin-right: 10px;color:#568ea1;font-size: 20px;font-style: bold;margin-left:460px;margin-bottom:15px;">CART</b>
 @{
-    if (@ViewBag.CartItems.Count == 0)
+    //if (@ViewBag.CartItems.Count == 0)
+    
+    if (@ViewBag.ItemCount == 0)
     {
         <div class="alert alert-info">
             <strong>Your cart is empty!</strong>

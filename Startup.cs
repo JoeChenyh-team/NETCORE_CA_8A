@@ -70,7 +70,6 @@ namespace NETCORE_CA_8A
             app.UseAuthorization();
             app.UseSession();
 
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

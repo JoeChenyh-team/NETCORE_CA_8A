@@ -47,12 +47,28 @@ namespace NETCORE_CA_8A.Controllers
                 ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
                 ViewBag.Username = HttpContext.Session.GetString("Username");
             }
-            
-            ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
-            if(keyword != "")
+
+            if (HttpContext.Session.GetInt32("cartItemCount") != null)
+            {
+                ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+            }
+            else
+            {
+                ViewBag.ItemCount = GetCartItemCount();
+            }
+
+            if (keyword != "")
             {
                 ViewBag.serchKeyword = keyword;
             }
+
+            if (HttpContext.Session.GetString("SessionId") == null)
+            {
+                //string SessionId = HttpContext.Session.Id;
+                string SessionId = System.Guid.NewGuid().ToString();
+                HttpContext.Session.SetString("SessionId", SessionId);
+            }
+            
             return View();
         }
 
@@ -73,5 +89,44 @@ namespace NETCORE_CA_8A.Controllers
                     p.description.ToLower().Contains(keyword.ToLower()))
                     .ToList();
         }
+
+
+        public int GetCartItemCount()
+        {
+            string SessionId = HttpContext.Session.GetString("SessionId");
+            int uid;
+
+            Cart cart;
+
+            ViewBag.SessionId = SessionId;
+
+            if (HttpContext.Session.GetInt32("UserId") != null)
+            {
+                uid = (int)HttpContext.Session.GetInt32("UserId");
+                cart = _dbcontext.Cart.FirstOrDefault(x => x.CustomerId == uid && x.IsCheckOut == 0);
+
+                if (cart == null)
+                {
+                    cart = new Cart(SessionId, uid);
+                    _dbcontext.Cart.Add(cart);
+                    _dbcontext.SaveChanges();
+                    return 0;
+                }
+            }
+            else
+            {
+                cart = _dbcontext.Cart.FirstOrDefault(x => x.SessionId == SessionId && x.IsCheckOut == 0);
+                if (cart == null)
+                {
+                    cart = new Cart(SessionId);
+                    _dbcontext.Cart.Add(cart);
+                    _dbcontext.SaveChanges();
+                    return 0;
+                }
+            }
+
+            return cart.Quantity;
+        }
+
     }
 }
