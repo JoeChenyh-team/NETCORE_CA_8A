@@ -41,10 +41,11 @@
             <form action=@str class="form-inline">
                 <div><h3 class="title">@product.productName</h3></div>
                 <div></div>
-                <img src="@product.Image" width="120" height="120"><p></p>
-                <div align="right">Price: $@product.unitPrice</div><p></p>
+                <img src="@product.Image" width="120" height="120"><br><p></p>
+                
+                <div align="right">Price: $@product.unitPrice</div><br><p></p>
                 <input name="productId" type="hidden" value="@product.Id" />
-                <br>
+                
                 <br>
                 <br>
                 <div><p class="desc"><b>Description:</b> @product.description</p></div>
