@@ -23,6 +23,7 @@ else
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Price Total</th>
+                <th>Checkout Date</th>
                 <th colspan="2">Activation Code</th>
             </tr>
         </thead>
@@ -39,6 +40,7 @@ else
                     <td>@item.Product.unitPrice</td>
                     <td>@item.Quantity</td>
                     <td>@lineTotal</td>
+                    <td>@item.CheckoutTime</td>
                     <td>
                         <select>
                             @{
@@ -64,7 +66,7 @@ else
                 </tr>
             }
             <tr style="text-align:left">
-                <td colspan="6">
+                <td colspan="7">
                     <form action="/Gallery/Gallery">
                         <input class="btn btn-outline-primary" type="submit" value="Continue Shopping">
                     </form>

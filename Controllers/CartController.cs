@@ -209,31 +209,40 @@ namespace NETCORE_CA_8A.Controllers
         {
             string SessionId = HttpContext.Session.GetString("SessionId");
             int uid;
+            Cart cart;
 
-            ViewBag.SessionId = SessionId;
+
+             ViewBag.SessionId = SessionId;
 
             using (IDbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
                 //Cart cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
-                Cart cart = db.Cart.FirstOrDefault(x => x.SessionId == SessionId && x.IsCheckOut == 0);
+                    
                 try
                 {
-                    if (cart == null)
+                    if (HttpContext.Session.GetInt32("UserId") != null)
                     {
-                        //   cart = new Cart(userId);
-                        if(HttpContext.Session.GetInt32("UserId") != null)
+                        uid = (int)HttpContext.Session.GetInt32("UserId");
+                        cart = db.Cart.FirstOrDefault(x => x.CustomerId == uid && x.IsCheckOut == 0);
+                        if (cart == null)
                         {
-                            uid = (int)HttpContext.Session.GetInt32("UserId");
-                            cart = new Cart(SessionId,uid);
+                            cart = new Cart(SessionId, uid);
+                            db.Cart.Add(cart);
+                            db.SaveChanges();
                         }
-                        else
+                    }
+                    else
+                    {
+                        cart = db.Cart.FirstOrDefault(x => x.SessionId == SessionId && x.IsCheckOut == 0);
+                        if (cart == null)
                         {
                             cart = new Cart(SessionId);
+                            db.Cart.Add(cart);
+                            db.SaveChanges();
                         }
-                        db.Cart.Add(cart);
-                        db.SaveChanges();
                     }
 
+                   
                     // Product product = db.Products.FirstOrDefault(x => x.Id == productId);
                     Product product = db.Products
                              .Where(x => x.Id == productId)
