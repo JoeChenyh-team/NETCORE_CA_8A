@@ -40,25 +40,26 @@
         <div class="gallery_product col-lg-3 col-md-4 col-xs-6">
             <form action=@str class="form-inline">
                 <div><h3 class="title">@product.productName</h3></div>
-                <div><p class="desc">@product.description</p></div>
                 <div></div>
                 <img src="@product.Image" width="120" height="120"><p></p>
-                <div>Price: $@product.unitPrice</div><p></p>
+                <div align="right">Price: $@product.unitPrice</div><p></p>
                 <input name="productId" type="hidden" value="@product.Id" />
+                <br>
+                <br>
+                <br>
+                <div><p class="desc"><b>Description:</b> @product.description</p></div>
+                <div></div>
                 <input class="button-primary" type="submit" value="Add To Cart">
+                <div></div>
+                <div></div>
             </form>
         </div>
-        <div></div>
-        <td></td>
-        <td></td>
-        <div></div>
-        <td></td>
-        <td></td>
-        @Html.Raw("<b>RECOMMENDATIONS OF SIMILAR PRODUCTS:</b>")
+        <br>
+        <div align ="right">@Html.Raw("<b>RECOMMENDATIONS OF SIMILAR PRODUCTS:</b>")</div>
 
         @foreach (Product recommendation in @ViewBag.Recommendation)
         {
-            <div><a href="/Product/View2?newid=@recommendation.Id"><p class="title">@recommendation.productName</p></a></div>
+            <div align ="right"><a href="/Product/View2?newid=@recommendation.Id"><p class="title">@recommendation.productName</p></a></div>
             //<div><p class="title">@recommendation.RecommendedProduct2</p></div>
             //<div><p class="title">@recommendation.RecommendedProduct3</p></div>
             <p>
