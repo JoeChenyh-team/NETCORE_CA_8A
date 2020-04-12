@@ -32,7 +32,7 @@ namespace NETCORE_CA_8A
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(3000);
+                options.IdleTimeout = TimeSpan.FromSeconds(30000);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
