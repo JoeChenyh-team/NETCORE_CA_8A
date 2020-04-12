@@ -32,8 +32,7 @@ namespace NETCORE_CA_8A.Controllers
             ViewBag.ItemCount = itemCount;
             int? uid = HttpContext.Session.GetInt32("UserId");
             ViewBag.UserId = uid;
-            //ViewBag.Username = (string)HttpContext.Session.GetString("Username");
-            //ViewData["username"] = username;
+
             string uname = HttpContext.Session.GetString("Username");
             ViewBag.Username = uname;
 
@@ -43,14 +42,19 @@ namespace NETCORE_CA_8A.Controllers
                 ViewBag.search = "not found";
               
             }
-            /* ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
-             ViewBag.Username = (string)HttpContext.Session.GetString("Username");*/
+            if(HttpContext.Session.GetInt32("UserId") != null)
+            {
+                ViewBag.UserId = (int)HttpContext.Session.GetInt32("UserId");
+                ViewBag.Username = HttpContext.Session.GetString("Username");
+            }
+            
             ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+            if(keyword != "")
+            {
+                ViewBag.serchKeyword = keyword;
+            }
             return View();
         }
-
-
-
 
         public List<Product> GetAllProducts(string keyword)
         {

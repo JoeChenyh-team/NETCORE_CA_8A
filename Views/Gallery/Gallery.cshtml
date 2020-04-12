@@ -71,6 +71,7 @@
                     <div class="card-footer">
                         @Html.ActionLink("Click to find out more", "View2", "Product", new { newid = @product.Id })
                         <input name="productId" type="hidden" value="@product.Id" />
+                        <input name="searchKeyword" type="hidden" value="@ViewBag.serchKeyword" />
                         <input class="button-primary" type="submit" value="Add To Cart">
                     </div>
                 </div>
