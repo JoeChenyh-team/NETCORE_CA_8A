@@ -172,6 +172,7 @@ namespace NETCORE_CA_8A.Controllers
             }
             ViewBag.cartItems = GetCartItems(cart.Id);
             ViewBag.ItemCount = 0;
+            HttpContext.Session.SetInt32("cartItemCount", 0);
             return View();
         }
 
@@ -333,8 +334,9 @@ namespace NETCORE_CA_8A.Controllers
             string SessionId = HttpContext.Session.Id;
 
             ViewBag.SessionId = SessionId;
+            int uid = (int) HttpContext.Session.GetInt32("UserId");
 
-            List<Cart> purchaseCarts = db.Cart.Where(cart => cart.SessionId == SessionId && cart.IsCheckOut == 1).OrderBy(cart => cart.CheckoutTime).ToList();
+            List<Cart> purchaseCarts = db.Cart.Where(cart => cart.CustomerId == uid && cart.IsCheckOut == 1).OrderBy(cart => cart.CheckoutTime).ToList();
 
             List<CartItem> cartItems = new List<CartItem>();
             foreach (Cart cart in purchaseCarts)
