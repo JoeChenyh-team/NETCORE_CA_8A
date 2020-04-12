@@ -25,7 +25,7 @@ namespace NETCORE_CA_8A.Controllers
         }
 
        // [Route("/AddCart/{productId}/{fromProdDetail}")]
-        public ActionResult AddtoCart(string productId,string fromProdDetail="")
+        public ActionResult AddtoCart(string productId,string fromProdDetail="",string searchKeyword="")
         {
             ViewBag.UserId = userId;
             //ViewBag.Username = (string)HttpContext.Session.GetString("Username");
@@ -38,7 +38,7 @@ namespace NETCORE_CA_8A.Controllers
             {
                 return RedirectToRoute(new { controller = "Product", action = "View2", itemCount = ViewBag.ItemCount });
             }
-            return RedirectToRoute(new { controller = "Gallery", action = "Gallery", itemCount = ViewBag.ItemCount });
+            return RedirectToRoute(new { controller = "Gallery", action = "Gallery", itemCount = ViewBag.ItemCount, keyword = searchKeyword });
         }
 
         public ActionResult AddItemFromCart(string productId)
