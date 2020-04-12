@@ -201,7 +201,7 @@ namespace NETCORE_CA_8A.DB
 
             Recommendation recommendation6 = new Recommendation();
             recommendation6.Id = Guid.NewGuid().ToString();
-            recommendation6.ProductId = product5.Id;
+            recommendation6.ProductId = product6.Id;
             recommendation6.RecommendedProduct1 = product2.productName;
             recommendation6.RecommendedProduct2 = product3.productName;
             recommendation6.RecommendedProduct3 = product4.productName;
@@ -209,27 +209,29 @@ namespace NETCORE_CA_8A.DB
 
             Recommendation recommendation7 = new Recommendation();
             recommendation7.Id = Guid.NewGuid().ToString();
-            recommendation7.ProductId = product5.Id;
-            recommendation7.RecommendedProduct1 = product2.productName;
-            recommendation7.RecommendedProduct2 = product3.productName;
+            recommendation7.ProductId = product7.Id;
+            recommendation7.RecommendedProduct1 = product8.productName;
+            recommendation7.RecommendedProduct2 = product9.productName;
             recommendation7.RecommendedProduct3 = product4.productName;
             dbcontext.Add(recommendation7);
 
             Recommendation recommendation8 = new Recommendation();
             recommendation8.Id = Guid.NewGuid().ToString();
-            recommendation8.ProductId = product5.Id;
-            recommendation8.RecommendedProduct1 = product2.productName;
-            recommendation8.RecommendedProduct2 = product3.productName;
+            recommendation8.ProductId = product8.Id;
+            recommendation8.RecommendedProduct1 = product7.productName;
+            recommendation8.RecommendedProduct2 = product9.productName;
             recommendation8.RecommendedProduct3 = product4.productName;
             dbcontext.Add(recommendation8);
 
             Recommendation recommendation9 = new Recommendation();
             recommendation9.Id = Guid.NewGuid().ToString();
-            recommendation9.ProductId = product5.Id;
-            recommendation9.RecommendedProduct1 = product2.productName;
-            recommendation9.RecommendedProduct2 = product3.productName;
+            recommendation9.ProductId = product9.Id;
+            recommendation9.RecommendedProduct1 = product7.productName;
+            recommendation9.RecommendedProduct2 = product8.productName;
             recommendation9.RecommendedProduct3 = product4.productName;
             dbcontext.Add(recommendation9);
+
+           
 
 
 
