@@ -56,11 +56,11 @@
         <td></td>
         @Html.Raw("<b>RECOMMENDATIONS OF SIMILAR PRODUCTS:</b>")
 
-        @foreach (Recommendation recommendation in @ViewBag.Recommendation)
+        @foreach (Product recommendation in @ViewBag.Recommendation)
         {
-            <div><p class="title">@recommendation.RecommendedProduct1</p></div>
-            <div><p class="title">@recommendation.RecommendedProduct2</p></div>
-            <div><p class="title">@recommendation.RecommendedProduct3</p></div>
+            <div><a href="/Product/View2?newid=@recommendation.Id"><p class="title">@recommendation.productName</p></a></div>
+            //<div><p class="title">@recommendation.RecommendedProduct2</p></div>
+            //<div><p class="title">@recommendation.RecommendedProduct3</p></div>
             <p>
             </p>
 
@@ -73,15 +73,66 @@
         <td></td>
         <td></td>
         @Html.Raw("<b>REVIEWS BY CUSTOMERS:</b>")
-        @foreach (Review review in ViewBag.Review)
-        {<div><p class="title">Review ID: @review.Id</p></div>
-        <div><p class="comments">Comments: @review.Comments</p></div>
-        <div><p class="stars">Number of stars: @review.Stars</p></div>
-        <p>
-        </p>
+
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+
+        <table style="width:100%">
+            <tr>
+                <th>Review Date</th>
+                <th>Review Comments</th>
+                <th>Stars</th>
+            </tr>
+
+            @foreach (Review review in ViewBag.Review)
+            {
+                <tr>
+                    <th>@review.CreationTime</th>
+                    <th>@review.Comments</th>
+                    <th>@review.Stars</th>
+                </tr>
+            }
+        </table>
+
+
+
+
+
+
+
+        @Html.Raw("<b>Submit your review for this product:</b>")
+
+        <form id="submitreview" action="/Product/SubmitReview" method="POST">
+            <label for="comments">Comments:</label><br>
+            <input type="text" id="comments" name="comments" value=""><br>
+            <label for="stars">Number of stars (maximum 5)</label><br>
+            <input type="text" id="stars" name="stars" value=""><br><br>
+            <input name="newid" type="hidden" value="@product.Id">
+            <input type="submit" value="Submit" onclick="return submit()">
+        </form>
+
+
+
     }
 
 
-    }
 }
-    
+
+
+
+

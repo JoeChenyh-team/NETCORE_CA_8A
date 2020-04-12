@@ -48,6 +48,7 @@ namespace NETCORE_CA_8A.Controllers
             ViewBag.Recommendation = GetAllRecommend(newid);
             ViewBag.Review = GetAllReview(newid);
 
+
             string uname = HttpContext.Session.GetString("Username");
             ViewBag.Username = uname;
 
@@ -76,22 +77,16 @@ namespace NETCORE_CA_8A.Controllers
                     p.Id.ToLower() == newid.ToLower()).ToList();
         }
 
-        public List<Recommendation> GetAllRecommend(string newid)
+        public List<Product> GetAllRecommend(string newid)
         {
-            if (newid == "")
-            {
-                return _dbcontext.Recommendation.ToList();
-            }
+            
 
-            if (newid == null)
-            {
-                return _dbcontext.Recommendation.ToList();
-            }
+            string CategoryId = _dbcontext.Products.Where(p => p.Id == newid).Select(Category => Category.CategoryId).Single();
 
+            List<Product> Recommendations = _dbcontext.Products.Where(c => c.CategoryId == CategoryId && c.Id != newid).ToList();
 
+            return Recommendations;
 
-            return _dbcontext.Recommendation.Where(p =>
-                    p.ProductId.ToLower() == newid.ToLower()).ToList();
         }
 
         public List<Review> GetAllReview(string newid)
@@ -111,6 +106,42 @@ namespace NETCORE_CA_8A.Controllers
             return _dbcontext.Review.Where(p =>
                     p.ProductId.ToLower() == newid.ToLower()).ToList();
         }
+
+        public IActionResult SubmitReview(string comments, int stars, string newid)
+        {
+            /* Review review;
+             int userId;
+             string uname;
+             string SessionId = HttpContext.Session.Id; */
+
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+            }
+            else
+            {
+                Review review = new Review();
+                review.Id = Guid.NewGuid().ToString();
+                review.ProductId = newid;
+                review.Comments = comments;
+                review.Stars = stars;
+                review.CreationTime = DateTime.Now;
+                review.CustomerId = (int)HttpContext.Session.GetInt32("UserId");
+                _dbcontext.Review.Add(review);
+                _dbcontext.SaveChanges();
+
+                return RedirectToRoute(new { controller = "Gallery", action = "Gallery" });
+
+
+            }
+        }
     }
 }
+
+
+   
+    
+
    
