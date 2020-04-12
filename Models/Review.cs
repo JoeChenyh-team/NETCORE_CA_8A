@@ -13,6 +13,8 @@ namespace NETCORE_CA_8A.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
+        public DateTime CreationTime { get; set; }
+
         [MaxLength(36)]
         public string ProductId { get; set; }
 

@@ -106,6 +106,42 @@ namespace NETCORE_CA_8A.Controllers
             return _dbcontext.Review.Where(p =>
                     p.ProductId.ToLower() == newid.ToLower()).ToList();
         }
+
+        public IActionResult SubmitReview(string comments, int stars, string newid)
+        {
+            /* Review review;
+             int userId;
+             string uname;
+             string SessionId = HttpContext.Session.Id; */
+
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+            }
+            else
+            {
+                Review review = new Review();
+                review.Id = Guid.NewGuid().ToString();
+                review.ProductId = newid;
+                review.Comments = comments;
+                review.Stars = stars;
+                review.CreationTime = DateTime.Now;
+                review.CustomerId = (int)HttpContext.Session.GetInt32("UserId");
+                _dbcontext.Review.Add(review);
+                _dbcontext.SaveChanges();
+
+                return RedirectToRoute(new { controller = "Gallery", action = "Gallery" });
+
+
+            }
+        }
     }
 }
+
+
+   
+    
+
    
