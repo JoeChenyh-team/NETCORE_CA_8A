@@ -21,13 +21,17 @@ namespace NETCORE_CA_8A.Models
         public decimal Value { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
 
+        public string SessionId { get; set; }
+
         public Cart()
         {
         }
 
-        public Cart(int customerId)
+        //public Cart(int customerId)
+        public Cart(string SessionId)
         {
-            this.CustomerId = customerId;
+            //this.CustomerId = customerId;
+            this.SessionId = SessionId;
             this.CreationTime = DateTime.Now;
             this.IsCheckOut = 0;
         }
