@@ -82,7 +82,18 @@ namespace NETCORE_CA_8A.Controllers
         public ActionResult CheckoutCart()
         {
             Cart cart;
-            int userId = 1;
+            
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                
+                return RedirectToRoute(new { controller = "Home", action = "Index"});
+
+            }
+            else
+            {
+                int userId = (int)HttpContext.Session.GetInt32("UserId");
+            }
+
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try

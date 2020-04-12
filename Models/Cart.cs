@@ -28,12 +28,14 @@ namespace NETCORE_CA_8A.Models
         }
 
         //public Cart(int customerId)
-        public Cart(string SessionId)
+        public Cart(string SessionId, int CustomerId = 0)
         {
             //this.CustomerId = customerId;
             this.SessionId = SessionId;
             this.CreationTime = DateTime.Now;
             this.IsCheckOut = 0;
+            this.CustomerId = CustomerId;
+            
         }
     }
 
