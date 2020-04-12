@@ -56,11 +56,11 @@
         <td></td>
         @Html.Raw("<b>RECOMMENDATIONS OF SIMILAR PRODUCTS:</b>")
 
-        @foreach (Recommendation recommendation in @ViewBag.Recommendation)
+        @foreach (Product recommendation in @ViewBag.Recommendation)
         {
-            <div><p class="title">@recommendation.RecommendedProduct1</p></div>
-            <div><p class="title">@recommendation.RecommendedProduct2</p></div>
-            <div><p class="title">@recommendation.RecommendedProduct3</p></div>
+            <div><a href="/Product/View2?newid=@recommendation.Id"><p class="title">@recommendation.productName</p></a></div>
+            //<div><p class="title">@recommendation.RecommendedProduct2</p></div>
+            //<div><p class="title">@recommendation.RecommendedProduct3</p></div>
             <p>
             </p>
 

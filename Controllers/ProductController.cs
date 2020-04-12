@@ -48,6 +48,7 @@ namespace NETCORE_CA_8A.Controllers
             ViewBag.Recommendation = GetAllRecommend(newid);
             ViewBag.Review = GetAllReview(newid);
 
+
             string uname = HttpContext.Session.GetString("Username");
             ViewBag.Username = uname;
 
@@ -76,22 +77,16 @@ namespace NETCORE_CA_8A.Controllers
                     p.Id.ToLower() == newid.ToLower()).ToList();
         }
 
-        public List<Recommendation> GetAllRecommend(string newid)
+        public List<Product> GetAllRecommend(string newid)
         {
-            if (newid == "")
-            {
-                return _dbcontext.Recommendation.ToList();
-            }
+            
 
-            if (newid == null)
-            {
-                return _dbcontext.Recommendation.ToList();
-            }
+            string CategoryId = _dbcontext.Products.Where(p => p.Id == newid).Select(Category => Category.CategoryId).Single();
 
+            List<Product> Recommendations = _dbcontext.Products.Where(c => c.CategoryId == CategoryId && c.Id != newid).ToList();
 
+            return Recommendations;
 
-            return _dbcontext.Recommendation.Where(p =>
-                    p.ProductId.ToLower() == newid.ToLower()).ToList();
         }
 
         public List<Review> GetAllReview(string newid)

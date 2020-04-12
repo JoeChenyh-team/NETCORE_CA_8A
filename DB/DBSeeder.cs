@@ -159,7 +159,7 @@ namespace NETCORE_CA_8A.DB
               dbcontext.Add(product7);
               */
 
-            Recommendation recommendation1 = new Recommendation();
+            /*Recommendation recommendation1 = new Recommendation();
             recommendation1.Id = Guid.NewGuid().ToString();
             recommendation1.ProductId = product1.Id;
             recommendation1.RecommendedProduct1 = product2.productName;
@@ -229,7 +229,7 @@ namespace NETCORE_CA_8A.DB
             recommendation9.RecommendedProduct1 = product7.productName;
             recommendation9.RecommendedProduct2 = product8.productName;
             recommendation9.RecommendedProduct3 = product4.productName;
-            dbcontext.Add(recommendation9);
+            dbcontext.Add(recommendation9);*/
 
            
 
