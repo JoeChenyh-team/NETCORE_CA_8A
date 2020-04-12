@@ -58,12 +58,19 @@ else
                     <td colspan="6">
                         <form action="/Gallery/Gallery">
                             <input type="hidden" name="itemCount" value="@ViewBag.ItemCount" />
-                            <input class="btn btn-outline-primary" type="submit" value="Continue Shopping">
+
                         </form>
                     </td>
-                    
                 </tr>
             }
+            <tr style="text-align:left">
+                <td colspan="6">
+                    <form action="/Gallery/Gallery">
+                        <input class="btn btn-outline-primary" type="submit" value="Continue Shopping">
+                    </form>
+                </td>
+
+            </tr>
         </tbody>
     </table>
 }
