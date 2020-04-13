@@ -60,6 +60,37 @@ namespace NETCORE_CA_8A.Controllers
                
         }
 
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+        public IActionResult CreateAccount(string username, string password)
+        {
+            string hashPassword = Utils.Crypto.Sha256(password);
+            try
+            {
+                Customer customer = new Customer(username, hashPassword);
+                _dbcontext.Customers.Add(customer);
+                _dbcontext.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            var cust = _dbcontext.Customers.Where(x => x.Name == username)
+                     .FirstOrDefault();
+           
+            HttpContext.Session.SetString("Username", cust.Name);
+            HttpContext.Session.SetInt32("UserId", cust.Id);
+
+            if (HttpContext.Session.GetInt32("cartItemCount") != null)
+            {
+                ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
+            }
+
+            //return RedirectToAction("Gallery", "Gallery");
+            return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
+        }
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("Username");
