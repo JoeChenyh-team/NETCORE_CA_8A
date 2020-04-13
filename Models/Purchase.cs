@@ -29,7 +29,7 @@ namespace NETCORE_CA_8A.Models
 
         [Required]
         [MaxLength(36)]       
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         [Required]
         [MaxLength(36)]

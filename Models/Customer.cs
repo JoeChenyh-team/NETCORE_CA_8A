@@ -9,9 +9,9 @@ namespace NETCORE_CA_8A.Models
 {
     public class Customer
     {
-        [MaxLength(36)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id {get; set; }
+        [MaxLength(36)] 
+        [DatabaseGenerated(DatabaseGeneratedOption.None)] 
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -19,8 +19,12 @@ namespace NETCORE_CA_8A.Models
 
         public Customer() { }
 
-        public Customer(String username, String password)
+        public Customer(String username, String password,String id = "")
         {
+            if (id == "")
+            {
+                this.Id = System.Guid.NewGuid().ToString();
+            }
             this.Name = username;
             this.Password = password;
         }

@@ -19,7 +19,7 @@ namespace NETCORE_CA_8A.Models
         public string ProductId { get; set; }
 
         [MaxLength(36)]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         [MaxLength(36)]
         public int Stars { get; set; }

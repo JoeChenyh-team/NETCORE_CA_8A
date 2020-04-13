@@ -94,7 +94,7 @@ namespace NETCORE_CA_8A.Controllers
         public int GetCartItemCount()
         {
             string SessionId = HttpContext.Session.GetString("SessionId");
-            int uid;
+            String uid;
 
             Cart cart;
 
@@ -102,7 +102,7 @@ namespace NETCORE_CA_8A.Controllers
 
             if (HttpContext.Session.GetInt32("UserId") != null)
             {
-                uid = (int)HttpContext.Session.GetInt32("UserId");
+                uid = HttpContext.Session.GetString("UserId");
                 cart = _dbcontext.Cart.FirstOrDefault(x => x.CustomerId == uid && x.IsCheckOut == 0);
 
                 if (cart == null)

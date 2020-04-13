@@ -16,19 +16,19 @@ namespace NETCORE_CA_8A.DB
         {
             Customer cust1 = new Customer();
             //cust1.Id = Guid.NewGuid().ToString();
-            cust1.Id = 1;
+            cust1.Id = "1";
             cust1.Name = "amanda";
             cust1.Password = Utils.Crypto.Sha256(cust1.Name);
             dbcontext.Add(cust1);
 
             Customer cust2 = new Customer();
-            cust2.Id = 2;
+            cust2.Id = "2";
             cust2.Name = "joe";
             cust2.Password = Utils.Crypto.Sha256(cust2.Name);
             dbcontext.Add(cust2);
 
             Customer cust3 = new Customer();
-            cust3.Id = 3;
+            cust3.Id = "3";
             cust3.Name = "esther";
             cust3.Password = Utils.Crypto.Sha256(cust3.Name);
             dbcontext.Add(cust3);

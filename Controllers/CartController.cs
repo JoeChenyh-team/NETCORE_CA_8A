@@ -61,13 +61,13 @@ namespace NETCORE_CA_8A.Controllers
         {
             Cart cart;
             Cart cart1;
-            int userId;
+            string userId;
             string uname;
             string SessionId = HttpContext.Session.GetString("SessionId");
 
-            if (HttpContext.Session.GetInt32("UserId") != null)
+            if (HttpContext.Session.GetString("UserId") != null)
             {
-                userId = (int)HttpContext.Session.GetInt32("UserId");
+                userId = HttpContext.Session.GetString("UserId");
                 // cart = db.Cart.Where(x => x.SessionId == SessionId).First();
                 cart1 = db.Cart.Where(x => x.CustomerId == userId && x.IsCheckOut == 0).FirstOrDefault();
                 if (cart1 == null)
@@ -118,11 +118,11 @@ namespace NETCORE_CA_8A.Controllers
         public ActionResult CheckoutCart()
         {
             Cart cart;
-            int userId;
+            String userId;
             string uname;
             string SessionId = HttpContext.Session.GetString("SessionId");
 
-            if (HttpContext.Session.GetInt32("UserId") == null)
+            if (HttpContext.Session.GetString("UserId") == null)
             {
 
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
@@ -130,7 +130,7 @@ namespace NETCORE_CA_8A.Controllers
             }
             else
             {
-                userId = (int)HttpContext.Session.GetInt32("UserId");
+                userId = HttpContext.Session.GetString("UserId");
                 cart = db.Cart.Where(x => x.CustomerId == userId && x.IsCheckOut == 0).First();
                 cart.CustomerId = userId;
                 db.Cart.Update(cart);
@@ -208,7 +208,7 @@ namespace NETCORE_CA_8A.Controllers
         public int AddItemToCart(string productId, int quantity)
         {
             string SessionId = HttpContext.Session.GetString("SessionId");
-            int uid;
+            string uid;
             Cart cart;
 
 
@@ -220,9 +220,9 @@ namespace NETCORE_CA_8A.Controllers
                     
                 try
                 {
-                    if (HttpContext.Session.GetInt32("UserId") != null)
+                    if (HttpContext.Session.GetString("UserId") != null)
                     {
-                        uid = (int)HttpContext.Session.GetInt32("UserId");
+                        uid = HttpContext.Session.GetString("UserId");
                         cart = db.Cart.FirstOrDefault(x => x.CustomerId == uid && x.IsCheckOut == 0);
                         if (cart == null)
                         {
@@ -296,12 +296,12 @@ namespace NETCORE_CA_8A.Controllers
         public List<CartItem> GetAllCartItems()
         {
             string SessionId = HttpContext.Session.GetString("SessionId");
-            int uid;
+            String uid;
             var cartId= 0;
 
-            if (HttpContext.Session.GetInt32("UserId") != null)
+            if (HttpContext.Session.GetString("UserId") != null)
             {
-                uid = (int)HttpContext.Session.GetInt32("UserId");
+                uid = HttpContext.Session.GetString("UserId");
                 cartId = db.Cart.Where(cart => cart.CustomerId == uid && cart.IsCheckOut == 0).Select(cart => cart.Id).FirstOrDefault();
             }
             else
@@ -315,7 +315,7 @@ namespace NETCORE_CA_8A.Controllers
 
         public ActionResult GetPurchasedHistory()
         {
-            if (HttpContext.Session.GetInt32("UserId") == null)
+            if (HttpContext.Session.GetString("UserId") == null)
             {
 
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
@@ -332,15 +332,15 @@ namespace NETCORE_CA_8A.Controllers
         public int GetItemCount()
         {
             string SessionId = HttpContext.Session.GetString("SessionId");
-            int uid;
+            string uid;
 
             Cart cart;
 
             ViewBag.SessionId = SessionId;
 
-            if (HttpContext.Session.GetInt32("UserId") != null)
+            if (HttpContext.Session.GetString("UserId") != null)
             {
-                uid = (int)HttpContext.Session.GetInt32("UserId");
+                uid = HttpContext.Session.GetString("UserId");
                 cart = db.Cart.FirstOrDefault(x => x.CustomerId == uid && x.IsCheckOut == 0);
 
                 if (cart == null)
@@ -406,7 +406,7 @@ namespace NETCORE_CA_8A.Controllers
             string SessionId = HttpContext.Session.GetString("SessionId");
 
             ViewBag.SessionId = SessionId;
-            int uid = (int)HttpContext.Session.GetInt32("UserId");
+            String uid = HttpContext.Session.GetString("UserId");
 
             List<Cart> purchaseCarts = db.Cart.Where(cart => cart.CustomerId == uid && cart.IsCheckOut == 1).OrderBy(cart => cart.CheckoutTime).ToList();
 

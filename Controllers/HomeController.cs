@@ -36,7 +36,7 @@ namespace NETCORE_CA_8A.Controllers
 
             if (CheckAuthentication(username, hashPassword))
             {
-                int uid = (int)HttpContext.Session.GetInt32("UserId");
+                String uid = HttpContext.Session.GetString("UserId");
                 ViewBag.UserId = uid;
                 
                 string uname= HttpContext.Session.GetString("Username");
@@ -81,7 +81,7 @@ namespace NETCORE_CA_8A.Controllers
                      .FirstOrDefault();
            
             HttpContext.Session.SetString("Username", cust.Name);
-            HttpContext.Session.SetInt32("UserId", cust.Id);
+            HttpContext.Session.SetString("UserId", cust.Id);
 
             if (HttpContext.Session.GetInt32("cartItemCount") != null)
             {
@@ -111,7 +111,7 @@ namespace NETCORE_CA_8A.Controllers
                 return false;
             }
             HttpContext.Session.SetString("Username", cust.Name);
-            HttpContext.Session.SetInt32("UserId", cust.Id);
+            HttpContext.Session.SetString("UserId", cust.Id);
             return true;
 
         }

@@ -116,7 +116,7 @@ namespace NETCORE_CA_8A.Controllers
              string uname;
              string SessionId = HttpContext.Session.Id; */
 
-            if (HttpContext.Session.GetInt32("UserId") == null)
+            if (HttpContext.Session.GetString("UserId") == null)
             {
 
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
@@ -130,7 +130,7 @@ namespace NETCORE_CA_8A.Controllers
                 review.Comments = comments;
                 review.Stars = stars;
                 review.CreationTime = DateTime.Now;
-                review.CustomerId = (int)HttpContext.Session.GetInt32("UserId");
+                review.CustomerId = HttpContext.Session.GetString("UserId");
                 _dbcontext.Review.Add(review);
                 _dbcontext.SaveChanges();
 

@@ -10,7 +10,7 @@ namespace NETCORE_CA_8A.Models
     public class Cart
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public String CustomerId { get; set; }
         [Column(TypeName = "datetime2")]
         public DateTime CreationTime { get; set; }
         [Column(TypeName = "datetime2")]
@@ -28,7 +28,7 @@ namespace NETCORE_CA_8A.Models
         }
 
         //public Cart(int customerId)
-        public Cart(string SessionId, int CustomerId = 0)
+        public Cart(string SessionId, string CustomerId = "")
         {
             //this.CustomerId = customerId;
             this.SessionId = SessionId;
