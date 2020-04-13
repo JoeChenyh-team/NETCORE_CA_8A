@@ -242,6 +242,7 @@ namespace NETCORE_CA_8A.DB
             review1.ProductId = product1.Id;
             review1.Stars = 5;
             review1.Comments = "Good product";
+            review1.CreationTime = DateTime.Now;
             dbcontext.Add(review1);
 
             Review review2 = new Review();
@@ -250,6 +251,7 @@ namespace NETCORE_CA_8A.DB
             review2.ProductId = product2.Id;
             review2.Stars = 3;
             review2.Comments = "I do not like this product";
+            review2.CreationTime = DateTime.Now;
             dbcontext.Add(review2);
 
             Review review3 = new Review();
@@ -258,6 +260,7 @@ namespace NETCORE_CA_8A.DB
             review3.ProductId = product3.Id;
             review3.Stars = 4;
             review3.Comments = "Not bad";
+            review3.CreationTime = DateTime.Now;
             dbcontext.Add(review3);
 
             Review review4 = new Review();
@@ -266,6 +269,7 @@ namespace NETCORE_CA_8A.DB
             review4.ProductId = product4.Id;
             review4.Stars = 5;
             review4.Comments = "Good product";
+            review4.CreationTime = DateTime.Now;
             dbcontext.Add(review4);
 
             Review review5 = new Review();
@@ -274,6 +278,7 @@ namespace NETCORE_CA_8A.DB
             review5.ProductId = product5.Id;
             review5.Stars = 5;
             review5.Comments = "Good product";
+            review5.CreationTime = DateTime.Now;
             dbcontext.Add(review5);
 
             Review review6 = new Review();
@@ -282,6 +287,7 @@ namespace NETCORE_CA_8A.DB
             review6.ProductId = product6.Id;
             review1.Stars = 5;
             review6.Comments = "Good product";
+            review6.CreationTime = DateTime.Now;
             dbcontext.Add(review6);
 
             Review review7 = new Review();
@@ -290,6 +296,7 @@ namespace NETCORE_CA_8A.DB
             review7.ProductId = product7.Id;
             review7.Stars = 5;
             review7.Comments = "Good product";
+            review7.CreationTime = DateTime.Now;
             dbcontext.Add(review7);
 
             Review review8 = new Review();
@@ -298,6 +305,7 @@ namespace NETCORE_CA_8A.DB
             review8.ProductId = product8.Id;
             review8.Stars = 5;
             review8.Comments = "Good product";
+            review8.CreationTime = DateTime.Now;
             dbcontext.Add(review8);
 
             Review review9 = new Review();
@@ -306,6 +314,7 @@ namespace NETCORE_CA_8A.DB
             review9.ProductId = product9.Id;
             review9.Stars = 5;
             review9.Comments = "Good product";
+            review9.CreationTime = DateTime.Now;
             dbcontext.Add(review9);
 
 
