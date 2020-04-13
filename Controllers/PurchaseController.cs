@@ -9,7 +9,6 @@ using NETCORE_CA_8A.Models;
 using NETCORE_CA_8A.DB;
 using Microsoft.AspNetCore.Http;
 
-//We use this to do the Purchase codes to display past and current purchase of customer 
 
 namespace NETCORE_CA_8A.Controllers
 {
@@ -27,14 +26,6 @@ namespace NETCORE_CA_8A.Controllers
             _logger = logger;
         }
 
-        /* Purchase purchase1 = new Purchase();
-            purchase1.OrderId = Guid.NewGuid().ToString();
-purchase1.CustomerId = cust1.Id;
-            purchase1.ProductId = product1.Id;
-            purchase1.ProductQty = 1;
-            purchase1.PurchaseDate = "03/03/2020";
-            purchase1.PurchaseKey = "12345";
-            dbcontext.Add(purchase1); */
 
         public IActionResult Purchase(String customerid)
         {
@@ -59,7 +50,6 @@ purchase1.CustomerId = cust1.Id;
             }
 
 
-            /*   return _dbcontext.Purchase.ToList(); */
             purchase = _dbcontext.Purchase
                     .Where(x => x.CustomerId == customerid)
                     .ToList();

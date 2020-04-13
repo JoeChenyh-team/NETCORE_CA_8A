@@ -8,7 +8,6 @@ using NETCORE_CA_8A.Models;
 using NETCORE_CA_8A.DB;
 using Microsoft.AspNetCore.Http;
 
-//We use the DBTester to check for the password authentication. 
 
 namespace NETCORE_CA_8A.DB
 {
@@ -19,32 +18,6 @@ namespace NETCORE_CA_8A.DB
         {
             this.dbcontext = dbcontext;
         }
-
-        public bool CheckAuthentication(string name, string password)
-        {
-                var pwd = dbcontext.Customers.Where(x => x.Name == name)
-                        .Select(x => x.Password).FirstOrDefault();
-                if (pwd == null || password != pwd)
-                {
-                    return false;
-                }
-                return true;
-           
-        }
-        /*public bool CheckAuthentication(string name, string password)
-        {
-            using (var dbcontext = new StoreDbContext())
-            {
-                var pwd = dbcontext.Customers.Where(x => x.Name == name)
-                        .Select(x => x.Password).FirstOrDefault();
-                if (pwd == null || password != pwd)
-                {
-                    return false;
-                }
-                return true;
-            }
-
-        }*/
-
+     
     }
 }

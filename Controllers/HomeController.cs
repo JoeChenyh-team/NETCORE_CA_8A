@@ -10,7 +10,6 @@ using NETCORE_CA_8A.Controllers;
 using NETCORE_CA_8A.DB;
 using Microsoft.AspNetCore.Http;
 
-//This controller is for the Home Page (for Login) 
 
 namespace NETCORE_CA_8A.Controllers
 {
@@ -48,7 +47,6 @@ namespace NETCORE_CA_8A.Controllers
                     ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
                 }
                 
-                //return RedirectToAction("Gallery", "Gallery");
                 return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
             }
                   
@@ -88,14 +86,12 @@ namespace NETCORE_CA_8A.Controllers
                 ViewBag.ItemCount = HttpContext.Session.GetInt32("cartItemCount");
             }
 
-            //return RedirectToAction("Gallery", "Gallery");
             return RedirectToRoute(new { controller = "Gallery", action = "Gallery", username = username });
         }
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("Username");
             HttpContext.Session.Remove("UserId");
-            //HttpContext.Session.Remove("cartItemCount");
             HttpContext.Session.Remove("SessionId");
             
            HttpContext.Session.Clear();

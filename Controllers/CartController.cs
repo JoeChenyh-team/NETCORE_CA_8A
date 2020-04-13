@@ -24,15 +24,13 @@ namespace NETCORE_CA_8A.Controllers
             _logger = logger;
         }
 
-        // [Route("/AddCart/{productId}/{fromProdDetail}")]
         public ActionResult AddtoCart(string productId, string fromProdDetail = "", string searchKeyword = "")
         {
             ViewBag.UserId = userId;
-            //ViewBag.Username = (string)HttpContext.Session.GetString("Username");
             ViewBag.ItemCount = AddItemToCart(productId, 1);
             string uname = HttpContext.Session.GetString("Username");
             ViewBag.Username = uname;
-            //return PartialView("_cartLogo");
+
             HttpContext.Session.SetInt32("cartItemCount", (int)ViewBag.ItemCount);
             if (fromProdDetail == "true")
             {
@@ -68,7 +66,7 @@ namespace NETCORE_CA_8A.Controllers
             if (HttpContext.Session.GetString("UserId") != null)
             {
                 userId = HttpContext.Session.GetString("UserId");
-                // cart = db.Cart.Where(x => x.SessionId == SessionId).First();
+
                 cart1 = db.Cart.Where(x => x.CustomerId == userId && x.IsCheckOut == 0).FirstOrDefault();
                 if (cart1 == null)
                 {
@@ -216,8 +214,7 @@ namespace NETCORE_CA_8A.Controllers
 
             using (IDbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
-                //Cart cart = db.Cart.FirstOrDefault(x => x.CustomerId == userId && x.IsCheckOut == 0);
-                    
+                
                 try
                 {
                     if (HttpContext.Session.GetString("UserId") != null)
@@ -243,7 +240,6 @@ namespace NETCORE_CA_8A.Controllers
                     }
 
                    
-                    // Product product = db.Products.FirstOrDefault(x => x.Id == productId);
                     Product product = db.Products
                              .Where(x => x.Id == productId)
                              .FirstOrDefault();

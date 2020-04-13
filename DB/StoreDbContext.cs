@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-//We use StoreDBContext to store all the get set functions 
-
 namespace NETCORE_CA_8A.DB
 {
     public class StoreDbContext:DbContext

@@ -27,10 +27,8 @@ namespace NETCORE_CA_8A.Models
         {
         }
 
-        //public Cart(int customerId)
         public Cart(string SessionId, string CustomerId = "")
         {
-            //this.CustomerId = customerId;
             this.SessionId = SessionId;
             this.CreationTime = DateTime.Now;
             this.IsCheckOut = 0;

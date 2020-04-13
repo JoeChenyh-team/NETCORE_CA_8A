@@ -5,30 +5,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-//We use this DBSeeder.cs to 'hardcode' the customers and products. 
-
 namespace NETCORE_CA_8A.DB
 {
     public class DBSeeder
     {
-        private List<Product> products;
         public DBSeeder(StoreDbContext dbcontext)
         {
             Customer cust1 = new Customer();
-            //cust1.Id = Guid.NewGuid().ToString();
-            cust1.Id = "1";
+            cust1.Id = Guid.NewGuid().ToString();
             cust1.Name = "amanda";
             cust1.Password = Utils.Crypto.Sha256(cust1.Name);
             dbcontext.Add(cust1);
 
             Customer cust2 = new Customer();
             cust2.Id = "2";
+            cust2.Id = Guid.NewGuid().ToString();
             cust2.Name = "joe";
             cust2.Password = Utils.Crypto.Sha256(cust2.Name);
             dbcontext.Add(cust2);
 
             Customer cust3 = new Customer();
-            cust3.Id = "3";
+            cust3.Id = Guid.NewGuid().ToString();
             cust3.Name = "esther";
             cust3.Password = Utils.Crypto.Sha256(cust3.Name);
             dbcontext.Add(cust3);
@@ -43,34 +40,26 @@ namespace NETCORE_CA_8A.DB
             cat2.catName = "MS";
             dbcontext.Add(cat2);
 
-            /*
-            Category cat3 = new Category();
-            cat3.Id = Guid.NewGuid().ToString();
-            cat3.catName = "ADO";
-            dbcontext.Add(cat3);
-            */
-
+            
            Product product1 = new Product();
-            // product1.Id = Guid.NewGuid().ToString();
-           product1.Id = "1";
+           product1.Id = Guid.NewGuid().ToString();
            product1.productName = ".NetCharts";
            product1.description = "Brings powerful charting capabilities to your .Net applications";
            product1.unitPrice = (double)99.00;
            product1.CategoryId = cat1.Id;
            product1.Image = "https://localhost:44331/lib/images/Charts.JPG";
-            product1.URL = "https://localhost:44331/Product/View/product1";
+           product1.URL = "https://localhost:44331/Product/View/product1";
            dbcontext.Add(product1);
 
            Product product2 = new Product();
-            // product2.Id = Guid.NewGuid().ToString();
-            product2.Id = "2";
-            product2.productName = ".NetPaypal";
+           product2.Id = Guid.NewGuid().ToString();
+           product2.productName = ".NetPaypal";
            product2.description = "Integrate your .Net apps with Paypal the easy way";
            product2.unitPrice = (double)69.00;
            product2.CategoryId = cat1.Id;
-            product2.Image = "https://localhost:44331/lib/images/Paypal.JPG";
-            product2.URL = "https://localhost:44331/Product/View/product2";
-            dbcontext.Add(product2);
+           product2.Image = "https://localhost:44331/lib/images/Paypal.JPG";
+           product2.URL = "https://localhost:44331/Product/View/product2";
+           dbcontext.Add(product2);
 
             Product product3 = new Product();
              product3.Id = Guid.NewGuid().ToString();
@@ -147,11 +136,6 @@ namespace NETCORE_CA_8A.DB
               purchase1.UTCPurchaseDate = new DateTime(2015, 12, 25);
               purchase1.ActivationKey = "12345";
               dbcontext.Add(purchase1);
-
-              
-           
-
-
 
 
             Review review1 = new Review();
@@ -235,22 +219,8 @@ namespace NETCORE_CA_8A.DB
             review9.CreationTime = DateTime.Now;
             dbcontext.Add(review9);
 
-
-
-
-
-
             dbcontext.SaveChanges();
         }
     }
 }
 
-/*  For reference (from Wing Tips project): 
-   public class ProductDatabaseInitializer : DropCreateDatabaseAlways<ProductContext>
-  {
-    protected override void Seed(ProductContext context)
-    {
-      GetCategories().ForEach(c => context.Categories.Add(c));
-      GetProducts().ForEach(p => context.Products.Add(p));
-    }
-    */

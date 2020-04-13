@@ -1,21 +1,4 @@
-﻿/*using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-namespace NETCORE_CA_8A.Controllers
-{
-    public class ProductController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
-}*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -111,10 +94,6 @@ namespace NETCORE_CA_8A.Controllers
 
         public IActionResult SubmitReview(string comments, int stars, string newid)
         {
-            /* Review review;
-             int userId;
-             string uname;
-             string SessionId = HttpContext.Session.Id; */
 
             if (HttpContext.Session.GetString("UserId") == null)
             {

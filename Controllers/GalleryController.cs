@@ -10,7 +10,6 @@ using NETCORE_CA_8A.DB;
 using NETCORE_CA_8A.Models;
 
 
-// This controller is for the Gallery. 
 
 namespace NETCORE_CA_8A.Controllers
 {
@@ -26,7 +25,6 @@ namespace NETCORE_CA_8A.Controllers
             _logger = logger;
         }
 
-       // [Route("/galleryRoute")]
         public IActionResult Gallery(int itemCount=0,string keyword="")
         {
             ViewBag.ItemCount = itemCount;
@@ -64,7 +62,6 @@ namespace NETCORE_CA_8A.Controllers
 
             if (HttpContext.Session.GetString("SessionId") == null)
             {
-                //string SessionId = HttpContext.Session.Id;
                 string SessionId = System.Guid.NewGuid().ToString();
                 HttpContext.Session.SetString("SessionId", SessionId);
             }
