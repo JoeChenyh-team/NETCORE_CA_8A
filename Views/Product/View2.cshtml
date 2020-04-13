@@ -141,7 +141,14 @@
             <label for="comments">Comments:</label><br>
             <input type="text" id="comments" name="comments" value="" required><br>
             <label for="stars">Number of stars (maximum 5)</label><br>
-            <input type="number" id="stars" name="stars" value="" max="5"><br><br>
+                                                                  <select id="stars" name="stars">
+                                                                      <option value="0">0 star</option>
+                                                                      <option value="1">1 star</option>
+                                                                      <option value="2">2 stars</option>
+                                                                      <option value="3">3 stars</option>
+                                                                      <option value="4">4 stars</option>
+                                                                      <option value="5">5 stars</option>
+                                                                  </select>
             <input name="newid" type="hidden" value="@product.Id">
             <input type="submit" value="Submit" id="reviewSubmit">
         </form>
