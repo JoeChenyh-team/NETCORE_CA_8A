@@ -24,7 +24,7 @@ namespace NETCORE_CA_8A.Models
         [MaxLength(36)]
         public int Stars { get; set; }
 
-        [MaxLength(36)]
+        [MaxLength(360)]
         public string Comments { get; set; }
 
         public virtual Customer customer { get; set; }
